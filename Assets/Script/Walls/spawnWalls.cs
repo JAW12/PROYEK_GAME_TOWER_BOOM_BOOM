@@ -38,7 +38,7 @@ public class spawnWalls : MonoBehaviour
                         tmpObj.gameObject.tag = "Walls";
                     }
                     else{
-                            Debug.Log("nabrak");
+                        Debug.Log("nabrak");
                     }
                 }
                 else

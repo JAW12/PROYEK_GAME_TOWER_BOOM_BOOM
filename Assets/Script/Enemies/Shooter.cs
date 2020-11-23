@@ -22,7 +22,7 @@ public class Shooter : MonoBehaviour
         flip = transform.localScale;
 
         //untuk flip
-        flip.x = -1;  //disesuaikan dengan prop scale x object nya
+        flip.x = -2;  //disesuaikan dengan prop scale x object nya
         transform.localScale = flip;
     }
 
@@ -62,6 +62,10 @@ public class Shooter : MonoBehaviour
         // paramdx = jarak antar peluru ? (aku krg tau)
         Vector2 posisi = new Vector2(2 * paramDx, 0);
         peluru_mc.GetComponent<PeluruShooter>().init(posisi);
-        Destroy(peluru_mc, 3f);
+
+        //atur supaya shooter yg nembak menjadi parent peluru
+        peluru_mc.transform.parent = gameObject.transform;
+
+        Destroy(peluru_mc, 10f);
     }
 }

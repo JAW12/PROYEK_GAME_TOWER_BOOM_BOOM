@@ -8,6 +8,8 @@ TagManager:
   - Kamikaze2
   - Shooter
   - Walls
+  - Explosion
+  - Bomb
   layers:
   - Default
   - TransparentFX
@@ -53,4 +55,13 @@ TagManager:
     locked: 0
   - name: ForegroundLayer
     uniqueID: 4059022295
+    locked: 0
+  - name: Musuh
+    uniqueID: 1967981857
+    locked: 0
+  - name: Peluru
+    uniqueID: 4031992223
+    locked: 0
+  - name: AttackExplosion
+    uniqueID: 1726784211
     locked: 0

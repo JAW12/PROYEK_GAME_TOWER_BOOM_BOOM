@@ -16,11 +16,13 @@ public class PeluruShooter : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // if (collision.CompareTag("SiMerah"))
-        // {
-        //     GameObject target = collision.gameObject;
-        //     //target.GetComponent<SiMerah2>().kenaSerang2();
-        //     Destroy(gameObject);
-        // }
+        if (collision.CompareTag("Walls"))
+        {
+            GameObject wall = collision.gameObject;
+            //target.GetComponent<SiMerah2>().kenaSerang2();
+
+            //hancurkan prefabs peluru
+            Destroy(gameObject);
+        }
     }
 }

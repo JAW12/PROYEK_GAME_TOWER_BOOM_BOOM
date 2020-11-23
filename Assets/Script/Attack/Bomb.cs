@@ -29,8 +29,7 @@ public class Bomb : MonoBehaviour
         cekMouseClicked();
         if(! isDropped){
             aturPosisi();
-        }
-        
+        }        
     }
 
     private void FixedUpdate()
