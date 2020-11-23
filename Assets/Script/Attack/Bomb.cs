@@ -60,7 +60,7 @@ public class Bomb : MonoBehaviour
         //klik kiri mouse global
         if(Input.GetMouseButtonUp(0)){
             isDropped = true;
-            Debug.Log("left mouse clicked");
+            // Debug.Log("left mouse clicked");
         }
     }
 }

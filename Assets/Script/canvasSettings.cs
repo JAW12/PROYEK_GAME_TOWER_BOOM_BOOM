@@ -22,7 +22,8 @@ public class canvasSettings : MonoBehaviour
     }
 
     public void startGame(){
-        SceneManager.LoadScene("Tutorial");
+        // SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadScene("Game");
     }
 
     // Update is called once per frame

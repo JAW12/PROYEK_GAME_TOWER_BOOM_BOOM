@@ -38,7 +38,7 @@ public class SpawnCoins : MonoBehaviour
             foreach (GameObject square in squares)
             {
                 BoxCollider2D col = square.GetComponent<BoxCollider2D>();
-               
+
                 if(col.OverlapPoint(Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10))))
                 {
                     GameObject tmpObj = Instantiate(text);

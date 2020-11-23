@@ -41,7 +41,7 @@ public class GameHandler : MonoBehaviour
         //buat empty gameobject yg baru aja dibuat sbg parent dari kamikaze yg digenerate
         obj.transform.parent = empty.transform;
         
-        Debug.Log("new kamikaze 1 created : " + x_spawn);
+        // Debug.Log("new kamikaze 1 created : " + x_spawn);
     }
     
 }
