@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class canvasSettings : MonoBehaviour
+public class canvasMenu : MonoBehaviour
 {
     public GameObject panelHelp;
     public GameObject panelMenu;
+    
     // Start is called before the first frame update
     void Start()
     {
