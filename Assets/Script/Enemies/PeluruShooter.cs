@@ -20,6 +20,7 @@ public class PeluruShooter : MonoBehaviour
         GetComponent<Rigidbody2D>().AddForce(posisi * kecepatan, ForceMode2D.Impulse);
     }
 
+    bool damage = true;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Walls"))
@@ -32,6 +33,12 @@ public class PeluruShooter : MonoBehaviour
 
             //hancurkan prefabs peluru
             Destroy(gameObject);
+            if(collision != null && collision.gameObject != null){
+                if(damage){
+                    StartCoroutine (WaitForSeconds());
+                    collision.gameObject.GetComponent<diserang>().attacked(1);
+                }
+            }
         }
         else if(collision.CompareTag("Tower")){
             //set bool
@@ -41,7 +48,20 @@ public class PeluruShooter : MonoBehaviour
             GameObject tower = collision.gameObject;
 
             //hancurkan prefabs peluru
-            Destroy(gameObject);            
+            Destroy(gameObject);   
+            if(collision != null && collision.gameObject != null){
+                if(damage){
+                    StartCoroutine (WaitForSeconds());
+                    collision.gameObject.GetComponent<diserang>().attacked(1);
+                }
+            }         
+        }
+
+        IEnumerator WaitForSeconds()
+        {
+            damage = false;
+            yield return new WaitForSecondsRealtime (3);
+            damage = true;
         }
     }
 }

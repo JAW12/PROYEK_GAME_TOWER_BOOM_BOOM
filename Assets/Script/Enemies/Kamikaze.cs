@@ -16,7 +16,7 @@ public class Kamikaze : MonoBehaviour
     public GameObject prefabsExplosion;
     GameObject grupExplosion;
     bool kenaWall, kenaTower;
-
+    bool damage = true;
     void Start()
     {        
         //deklarasi
@@ -73,17 +73,18 @@ public class Kamikaze : MonoBehaviour
         if (other.CompareTag("Walls"))
         {
             kenaWall = true;
-            kamikazeExplode();
+            kamikazeExplode(other);
             Debug.Log("Kamikaze kena wall");
         }
         else if(other.CompareTag("Tower")){
             kenaTower = true;
-            kamikazeExplode();
+            kamikazeExplode(other);
             Debug.Log("Kamikaze kena tower");
         }
     }
 
-    private void kamikazeExplode(){
+
+    private void kamikazeExplode(Collider2D other){
         //munculkan explosion
         GameObject objExplosion = Instantiate(
         prefabsExplosion, posisiKamikaze, 
@@ -94,5 +95,19 @@ public class Kamikaze : MonoBehaviour
 
         //langsung hancurkan parent empty gameobject dr prefabs saat ini
         Destroy(gameObject.transform.parent.gameObject);
+
+        if(other != null){
+            if(damage){
+                StartCoroutine (WaitForSeconds());
+                other.gameObject.GetComponent<diserang>().attacked(1.25f);
+            }
+        }
+    }
+
+    IEnumerator WaitForSeconds()
+    {
+        damage = false;
+        yield return new WaitForSecondsRealtime (3);    
+        damage = true;
     }
 }

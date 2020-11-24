@@ -9,6 +9,11 @@ public class spawnWalls : MonoBehaviour
     public GameObject area;
     bool can = true;
     public GameObject canvas;
+    GameObject grupWalls;
+
+    private void Start() {
+        grupWalls = GameObject.Find("GrupWalls");
+    }
 
     // Update is called once per frame
     void Update()
@@ -17,29 +22,36 @@ public class spawnWalls : MonoBehaviour
         {        
             int shop = canvas.GetComponent<canvasGame>().shop;
             Debug.Log(shop);
+            mousePos = Input.mousePosition;
+
             if(shop >= 0 && shop <= 2){
                 RaycastHit hit = new RaycastHit();      
                 Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-
                 if (Physics.Raycast(ray, out hit))
                 {
                     if (hit.collider.gameObject == area.gameObject)
                     {
-                        mousePos = Input.mousePosition;
                         Debug.Log("Click");
                         can = true;
                         GameObject[] walls = GameObject.FindGameObjectsWithTag("Walls");
                         foreach(GameObject w in walls){
-                            BoxCollider2D col = w.GetComponent<BoxCollider2D>();
-                            if(col.OverlapPoint(Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10)))){
-                                can = false;
+                            if(w != null){
+                                BoxCollider2D col = w.GetComponent<BoxCollider2D>();
+                                if(col.OverlapPoint(Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10)))){
+                                    can = false;
+                                }
                             }
                         }
                         if(can == true){
+                            GameObject empty = new GameObject();
+                            empty.transform.parent = grupWalls.transform;
+
                             GameObject tmpObj = Instantiate(wall);
-                            mousePos = Input.mousePosition;
                             tmpObj.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10));
-                            tmpObj.gameObject.tag = "Walls";
+                            tmpObj.transform.parent = empty.transform;
+
+                            empty.name = "walls_luar";
+                            tmpObj.name = "wall_dalam";
                             canvas.GetComponent<canvasGame>().shop = -1;
                             canvas.GetComponent<canvasGame>().panelCancel.SetActive(false);
                         }
