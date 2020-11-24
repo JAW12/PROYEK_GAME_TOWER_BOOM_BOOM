@@ -15,6 +15,7 @@ public class Kamikaze1 : MonoBehaviour
     //prefabs explosion
     public GameObject prefabsExplosion;
     GameObject grupExplosion;
+    GameObject canvas;
     bool kenaWall, kenaTower;
     bool sudahExplode;
 
@@ -24,6 +25,7 @@ public class Kamikaze1 : MonoBehaviour
     {        
         //deklarasi
         grupExplosion = GameObject.Find("GrupEnemies/GrupExplosion");
+        canvas = GameObject.Find("Canvas");
 
         //waktu gerak nanti yg berubah adalah posisi gameobject parent nya
         parent = gameObject.transform.parent;
@@ -49,18 +51,23 @@ public class Kamikaze1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //kurangi posisi kl masih blm meledak
-        if (kenaTower == false && kenaWall == false)
-        {
-            x -= jarakBergerak;
-            posisiKamikaze.x = x;
+        if(canvas.GetComponent<canvasGame>().isPaused == false){
+            if (kenaTower == false && kenaWall == false)
+            {
+                x -= jarakBergerak;
+                posisiKamikaze.x = x;
+            }
         }
+        //kurangi posisi kl masih blm meledak
+        
     }
 
     private void FixedUpdate()
     {
-        //atur posisi
-        parent.transform.position = posisiKamikaze;
+        if(canvas.GetComponent<canvasGame>().isPaused == false){
+            //atur posisi
+            parent.transform.position = posisiKamikaze;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
