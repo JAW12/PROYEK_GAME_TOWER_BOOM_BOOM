@@ -6015,7 +6015,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1448833507}
+      - m_Target: {fileID: 1969115195}
         m_MethodName: pause
         m_Mode: 1
         m_Arguments:
@@ -8281,6 +8281,7 @@ MonoBehaviour:
   imgUpStone: {fileID: 21300000, guid: aa2c33e2fb5275147a70489a955e9b42, type: 3}
   imgMaxStone: {fileID: 21300000, guid: 524ce35d980ca0e4cb4f240d96e76e0b, type: 3}
   panelCancel: {fileID: 558186885}
+  isPaused: 0
 --- !u!1 &1975199937
 GameObject:
   m_ObjectHideFlags: 0
