@@ -2810,8 +2810,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10.283817, y: 1.0015608, z: 0.20000002}
-  m_Center: {x: 0, y: 0.03774504, z: -0.000000473918}
+  m_Size: {x: 10.283817, y: 1.1186666, z: 0.20000002}
+  m_Center: {x: 0, y: 0.18998207, z: -0.000000473918}
 --- !u!1 &668291269
 GameObject:
   m_ObjectHideFlags: 0
@@ -3134,10 +3134,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12dcfbbfaa84729478d2dccd58d2d300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  max_hp: 100
   hp: 100
   jenis: 3
   prefabsExplosion: {fileID: 3688672606444755764, guid: 7a1d9741cb417c940889370fc4719cb9,
     type: 3}
+  wooden_wall_0: {fileID: 0}
+  wooden_wall_1: {fileID: 0}
+  wooden_wall_2: {fileID: 0}
+  wooden_wall_3: {fileID: 0}
+  wooden_wall_4: {fileID: 0}
+  wooden_wall: []
   hit: 0
 --- !u!1001 &742626283
 PrefabInstance:
@@ -6449,17 +6456,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c079a1c4d786e7643bcf254896162c12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wooden_wall_0: {fileID: 4847767638953255244, guid: 288e70f6776ffab4b8d9bf41a0629a1a,
-    type: 3}
-  wooden_wall_1: {fileID: -1792790301788911927, guid: 288e70f6776ffab4b8d9bf41a0629a1a,
-    type: 3}
-  wooden_wall_2: {fileID: 5858838609486130907, guid: 288e70f6776ffab4b8d9bf41a0629a1a,
-    type: 3}
-  wooden_wall_3: {fileID: -7121034707279329221, guid: 288e70f6776ffab4b8d9bf41a0629a1a,
-    type: 3}
-  wooden_wall_4: {fileID: 8243948264252366737, guid: 288e70f6776ffab4b8d9bf41a0629a1a,
-    type: 3}
-  wooden_wall: []
 --- !u!1 &1613610346
 GameObject:
   m_ObjectHideFlags: 0
