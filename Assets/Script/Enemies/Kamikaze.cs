@@ -14,24 +14,33 @@ public class Kamikaze : MonoBehaviour
 
     //prefabs explosion
     public GameObject prefabsExplosion;
-    bool kenaWalls;
+    GameObject grupExplosion;
+    bool kenaWall, kenaTower;
 
     void Start()
     {        
+        //deklarasi
+        grupExplosion = GameObject.Find("GrupEnemies/GrupExplosion");
+
         //waktu gerak nanti yg berubah adalah posisi gameobject parent nya
         parent = gameObject.transform.parent;
         posisiKamikaze = parent.gameObject.transform.position;
         x = posisiKamikaze.x;
 
+        setKondisiAwalKamikaze();
+    }
+
+    public void setKondisiAwalKamikaze(){     
         //deklarasi value awal
-        kenaWalls = false;
+        kenaWall = false;
+        kenaTower = false;
 
         //atur jarak bergerak
         if(gameObject.CompareTag("Kamikaze1")){
             //kamikaze kecil -> gerak lebih cepat
             // jarakBergerak = 0.009f;
             // jarakBergerak = 0.03f;
-            jarakBergerak = 0.01f;
+            jarakBergerak = 0.012f;
         }
         else if(gameObject.CompareTag("Kamikaze2")){
             //kamikaze panjang -> gerak lebih lambat
@@ -48,9 +57,6 @@ public class Kamikaze : MonoBehaviour
     void Update()
     {
         //kurangi posisi
-        if(! kenaWalls){
-            
-        }        
         x -= jarakBergerak;
         posisiKamikaze.x = x;
     }
@@ -66,21 +72,27 @@ public class Kamikaze : MonoBehaviour
         //cek apakah peluru mengenai walls
         if (other.CompareTag("Walls"))
         {
-            kenaWalls = true;
-
-            //munculkan explosion
-            GameObject objExplosion = Instantiate(
-            prefabsExplosion, posisiKamikaze, 
-            Quaternion.identity);
-
-            //langsung hancurkan parent empty gameobject dr prefabs saat ini
-            Destroy(gameObject.transform.parent.gameObject);
-
-            //hancurkan explosion setelah beberapa saat
-            Destroy(objExplosion, 2f);
+            kenaWall = true;
+            kamikazeExplode();
+            Debug.Log("Kamikaze kena wall");
+        }
+        else if(other.CompareTag("Tower")){
+            kenaTower = true;
+            kamikazeExplode();
+            Debug.Log("Kamikaze kena tower");
         }
     }
 
-   
+    private void kamikazeExplode(){
+        //munculkan explosion
+        GameObject objExplosion = Instantiate(
+        prefabsExplosion, posisiKamikaze, 
+        Quaternion.identity);
 
+        //atur parent explosion
+        objExplosion.transform.parent = grupExplosion.transform;
+
+        //langsung hancurkan parent empty gameobject dr prefabs saat ini
+        Destroy(gameObject.transform.parent.gameObject);
+    }
 }

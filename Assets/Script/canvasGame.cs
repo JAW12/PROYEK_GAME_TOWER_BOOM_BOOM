@@ -5,8 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 
 public class canvasGame : MonoBehaviour
-{
-    
+{    
     public int shop = -1;
     // -1 -> ga pegang apa - apa
     // 0 -> wooden wall
@@ -15,6 +14,19 @@ public class canvasGame : MonoBehaviour
     // 3 -> bomb
 
     public int wallLvl = 0;
+
+    //bom
+    public GameObject prefabsBom, grupBomb;
+    public int bombLvl, bombPrice, bombDamage;
+    public float bombAOE;
+    public bool sedangMengaturBom;
+    public TextMeshProUGUI textBombDamage, textBombAOE;
+    public Button btnBuyBomb, btnUpgradeBomb;
+
+    //stage dan game handler
+    public int stage;
+    public TextMeshProUGUI textStage;
+    public GameObject gameHandler;
 
     public TextMeshProUGUI textCoin;
     public Button btnBuyWall;
@@ -27,6 +39,15 @@ public class canvasGame : MonoBehaviour
     public Sprite imgMaxStone;
 
     public GameObject panelCancel;
+
+    public void setPanelTextStatusGame(){
+        //status bom
+        textBombDamage.text = bombDamage.ToString();
+        textBombAOE.text = bombAOE.ToString();     
+
+        //status stage
+        textStage.text = "Stage #" + stage.ToString();
+    }
 
     public void buyWall(){
         if(shop < 0 || shop > 2){
@@ -88,20 +109,107 @@ public class canvasGame : MonoBehaviour
         else if(shop == 2){
             coin += 10;
         }
+        else if(shop == 3){
+            //gajadi beli bom
+            coin += 10;
+            sedangMengaturBom = false;
+        }
+
         textCoin.text = coin.ToString();
         shop = -1;
         panelCancel.SetActive(false);
     }
 
+    void initValueAwal(){
+        //stage
+        stage = 1;
+
+        //bom
+        bombLvl = 1;
+        bombPrice = 10;
+        bombDamage = 10;
+        bombAOE = 2f;
+        sedangMengaturBom = false;
+
+        //atur text
+        setPanelTextStatusGame();
+
+        Debug.Log("init value");
+    }
+
+    public void buyBomb(){
+        //harga bom = 10
+        shop = 3;
+        int coin = int.Parse(textCoin.text);
+        //cek supaya ga beli multiple bom dlm 1x transaksi
+        if (! sedangMengaturBom)
+        {
+            if (coin >= bombPrice)
+            {
+                //kurangi coin kalo coin cukup
+                coin -= bombPrice;
+                textCoin.text = coin.ToString();
+
+                makeBomb();                    
+            }
+        }            
+    }
+
+    private void makeBomb(){
+        //empty object untuk menampung prefabs
+        GameObject empty = new GameObject();
+        empty.transform.position = new Vector2(0f, 0f);
+
+        //buat bomb
+        GameObject objprefabs = Instantiate(
+            prefabsBom, new Vector2(0f, 0f), 
+            Quaternion.identity);
+        
+        //atur parent group
+        empty.transform.parent = grupBomb.transform;
+        objprefabs.transform.parent = empty.transform;
+
+        //atur name waktu dimasukkan ke world
+        int ctr = grupBomb.transform.childCount + 1;
+        empty.name = "bomb" + ctr + "_created";
+        
+        //atur posisi bomb sesuai dengan posisi mouse
+        objprefabs.GetComponent<Bomb>().aturPosisi();
+    }
+
+    public void upgradeBomb(){
+        int coin = int.Parse(textCoin.text);
+
+        //hanya bisa upgrade kalo ga lagi ngatur bom dan level bom belum maxed out
+        if (! sedangMengaturBom && bombLvl < 5){
+            if (coin >= 10)
+            {
+                //upgrade damage dan AOE
+                bombDamage += 10;
+                bombAOE += 2f;
+
+                //kurangi coin kalo coin cukup
+                coin -= 10;
+
+                //atur text
+                textCoin.text = coin.ToString();
+                setPanelTextStatusGame();
+            }
+        }        
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        initValueAwal();
+        gameHandler.GetComponent<GameHandler>().setKondisiAwalGame();
+        
         panelCancel.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // Debug.Log("stage : " + stage);
     }
 }

@@ -5,9 +5,15 @@ using UnityEngine;
 public class PeluruShooter : MonoBehaviour
 {
     float kecepatan = 0.6f;
+    bool kenaWall, kenaTower;
 
     public void init(Vector2 posisi)
     {
+        //deklarasi value awal
+        kenaTower = false;
+        kenaWall = false;
+
+        //atur kecepatan peluru
         GetComponent<Rigidbody2D>().gravityScale = 0f;
         GetComponent<Rigidbody2D>().mass = 1f;
 
@@ -18,11 +24,24 @@ public class PeluruShooter : MonoBehaviour
     {
         if (collision.CompareTag("Walls"))
         {
+            //set bool
+            kenaWall = true;
+            
+            //tembok yg kena peluru
             GameObject wall = collision.gameObject;
-            //target.GetComponent<SiMerah2>().kenaSerang2();
 
             //hancurkan prefabs peluru
             Destroy(gameObject);
+        }
+        else if(collision.CompareTag("Tower")){
+            //set bool
+            kenaTower = true;
+
+            //tower yang kena peluru
+            GameObject tower = collision.gameObject;
+
+            //hancurkan prefabs peluru
+            Destroy(gameObject);            
         }
     }
 }

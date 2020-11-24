@@ -9,6 +9,9 @@ public class Explosion : MonoBehaviour
     {
         //langsung play sound effect explosion setelah prefabs ini dibuat
         GetComponent<SoundEffect>().playSound(0, false, 0.5f);
+
+        //hancurkan explosion setelah beberapa saat
+        Destroy(gameObject, 2f);
     }
 
     // Update is called once per frame

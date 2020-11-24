@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
+    /* == KONSEP STAGE WAVE GAME == 
+     * tiap stage (selain stage boss) masing2 punya 3 wave sebelum dia ganti jd next stage
+     * kalo stage boss wave nya jalan terus
+    */
+
+    public GameObject canvasGame;
+    
     public GameObject prefabsKamikaze1, prefabsKamikaze2, prefabsShooter;
-    public int stageWave;
+    public int stage, stageWave;
 
     public bool modeTutorial;
 
@@ -25,69 +32,88 @@ public class GameHandler : MonoBehaviour
         grupKamikaze1 = GameObject.Find("GrupEnemies/GrupKamikaze1");
         grupKamikaze2 = GameObject.Find("GrupEnemies/GrupKamikaze2");
 
+        setKondisiAwalGame();
+    }
+
+    public void setKondisiAwalGame(){
         //lokasi start spawn : y nya disesuaikan dengan area peletakkan walls
-        float x_start = (float)10;
+        float x_start = 10f;
         float y_start = (float)(-2.14);
         lokasiStartSpawn = new Vector2(x_start, y_start);
 
         //init variable stage
-        stageWave = 3;
+        stage = canvasGame.GetComponent<canvasGame>().stage;
+        stageWave = 1;
         modeTutorial = false;
 
         //deklarasi kondisi awal timer
         sedangJalan = true;
         detik = 0;
-
-        //spawn musuh
-        //spawnKamikaze1(2f, -1f);
-        //spawnKamikaze1(3f, -1.5f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //setiap 5 detik sekali spawn musuh
-        if (sedangJalan)
+        if (modeTutorial == false)
         {
-            if (detik > 0)
+            //setiap 5 detik sekali spawn musuh
+            if (sedangJalan)
             {
-                detik -= Time.deltaTime;
-            }
-            else
-            {
-                //spawn musuh
-                spawnEnemiesByStageWave();                
+                if (detik > 0)
+                {
+                    detik -= Time.deltaTime;
+                }
+                else
+                {
+                    //spawn musuh
+                    spawnEnemiesByStageWave();                
 
-                //reset ctr timer
-                Debug.Log("spawn enemies!");
-                detik = 5;
+                    //reset ctr timer
+                    Debug.Log("spawn enemies!");
+                    detik = 5;
+                }
             }
         }
+        
     }
 
     void spawnEnemiesByStageWave(){
         //cek stage
-        if(stageWave >= 1){
-            int jumlahKamikazeSpawned = 2 * stageWave;
+        if(stage >= 1){
+            int jumlahKamikazeSpawned = 2 * (stageWave + 1);
 
-            //max kamikaze yg bisa dispawn adalah 5
-            if (jumlahKamikazeSpawned > 5)
+            //max kamikaze yg bisa dispawn adalah 7
+            if (jumlahKamikazeSpawned > 7)
             {
-                jumlahKamikazeSpawned = 5;
+                jumlahKamikazeSpawned = 7;
             }
             spawnKamikazes(jumlahKamikazeSpawned);
         }
         
         //shooter baru muncul setelah stage 3
-        if(stageWave >= 3){
+        if(stage >= 3){
             spawnEnemyByType("shooter");
         }
 
         //kalo sudah stage final (stage 5) baru bos muncul
         //selain bos, kamikaze dan shooter juga muncul
-        if (stageWave == 5)
+        if (stage == 5)
         {
             spawnBoss();
+        }
+
+        //cek penambahan stage
+        stageWave++;
+        if(stage <= 4 && stageWave > 3){
+            stage++;
+            stageWave = 1;
+
+            //atur text stage
+            canvasGame.GetComponent<canvasGame>().stage = stage;
+            canvasGame.GetComponent<canvasGame>().setPanelTextStatusGame();
+        }
+        else{
+            stageWave = 3;
         }
     }
 
@@ -158,7 +184,13 @@ public class GameHandler : MonoBehaviour
                 prefabsMusuh, new Vector2(0f, 0f), 
                 Quaternion.identity);
             
-            //buat empty gameobject yg baru aja dibuat sbg parent dari prefabs musuh yg diinstantiate
+            //set kondisi awal
+            if (jenisMusuh == "kamikaze1" || jenisMusuh == "kamikaze2")
+            {
+                objprefabs.GetComponent<Kamikaze>().setKondisiAwalKamikaze();
+            }
+            
+            //buat empty gameobject sbg parent dari prefabs musuh yg diinstantiate
             objprefabs.transform.parent = empty.transform;
 
             //untuk dimasukkan ke dalam dunia game
