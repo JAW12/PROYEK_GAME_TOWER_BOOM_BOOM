@@ -114,6 +114,12 @@ public class canvasGame : MonoBehaviour
             //gajadi beli bom
             coin += 10;
             sedangMengaturBom = false;
+
+            //hancurkan bom
+            for (int i = 0; i < grupBomb.transform.childCount; i++)
+            {
+                Destroy(grupBomb.transform.GetChild(i).gameObject);
+            }
         }
 
         textCoin.text = coin.ToString();
@@ -151,7 +157,11 @@ public class canvasGame : MonoBehaviour
                 coin -= bombPrice;
                 textCoin.text = coin.ToString();
 
-                makeBomb();                    
+                sedangMengaturBom = true;
+                makeBomb();      
+
+                //aktifkan panel berisi button cancel
+                panelCancel.SetActive(true);
             }
         }            
     }

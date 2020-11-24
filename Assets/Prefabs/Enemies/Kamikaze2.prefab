@@ -138,7 +138,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8735971933022881745}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db757d0799c463d48b35ab36f1db184d, type: 3}
+  m_Script: {fileID: 11500000, guid: 325541ffd9cc5684b90af9d44d71b0fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   jarakBergerak: 0

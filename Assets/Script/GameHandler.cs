@@ -185,9 +185,12 @@ public class GameHandler : MonoBehaviour
                 Quaternion.identity);
             
             //set kondisi awal
-            if (jenisMusuh == "kamikaze1" || jenisMusuh == "kamikaze2")
+            if (jenisMusuh == "kamikaze1")
             {
-                objprefabs.GetComponent<Kamikaze>().setKondisiAwalKamikaze();
+                objprefabs.GetComponent<Kamikaze1>().setKondisiAwalKamikaze();
+            }
+            else if(jenisMusuh == "kamikaze2"){
+                objprefabs.GetComponent<Kamikaze2>().setKondisiAwalKamikaze();
             }
             
             //buat empty gameobject sbg parent dari prefabs musuh yg diinstantiate

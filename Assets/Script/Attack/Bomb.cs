@@ -17,6 +17,8 @@ public class Bomb : MonoBehaviour
     float jarakAtasGame;
     int bombDamage;
 
+    public float fallSpeed = 8.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,14 +43,14 @@ public class Bomb : MonoBehaviour
         if(! isDropped){
             aturPosisi();
         }        
+        else{
+            transform.Translate(Vector3.down * fallSpeed * Time.deltaTime, Space.World);
+        }
     }
 
     private void FixedUpdate()
     {        
         if(isDropped){
-            //kalikan desimal buat slow down falling speed
-            rigidBodyBomb.velocity = rigidBodyBomb.velocity * 0.9f;
-
             dropBomb();
         }
     }
@@ -77,18 +79,34 @@ public class Bomb : MonoBehaviour
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             //cek supaya pas klik shop bomb nya ga di drop
-            if (mousePos.y > 1f)
+            bool sedangMengaturBom = canvasGame.GetComponent<canvasGame>().sedangMengaturBom;
+            if (sedangMengaturBom)
             {
-                isDropped = true;
+                Debug.Log("pos mouse y : " + mousePos.y);
+                if (mousePos.y <= jarakAtasGame)
+                {
+                    isDropped = true;
+                }
+                
             }
         }
     }
 
     private void dropBomb(){
+        //kalikan desimal buat slow down falling speed
+        //rigidBodyBomb.velocity = rigidBodyBomb.velocity * 0.9f;
+
+        // rigidBodyBomb.mass = 1f;
+        // rigidBodyBomb.gravityScale = 1f;
+
+        
+
         bombExplode();
 
         //atur supaya bisa beli bom lagi
         canvasGame.GetComponent<canvasGame>().sedangMengaturBom = false;
+
+        Debug.Log("bomb dropped");
     }
 
     private void bombExplode(){
