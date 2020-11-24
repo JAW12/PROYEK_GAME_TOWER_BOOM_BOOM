@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3733418179543804854}
   - component: {fileID: 3733418179543804855}
   - component: {fileID: 3733418179543804848}
-  - component: {fileID: 5854296815247874135}
   - component: {fileID: 3063782269860673679}
+  - component: {fileID: 3275176368591017432}
   m_Layer: 0
   m_Name: Kamikaze1
   m_TagString: Kamikaze1
@@ -103,32 +103,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!61 &5854296815247874135
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3733418179543804849}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.0010504052, y: -0.0035022497}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.48, y: 0.18}
-    newSize: {x: 0.48, y: 0.18}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.48070037, y: 0.2472431}
-  m_EdgeRadius: 0
 --- !u!114 &3063782269860673679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,3 +118,19 @@ MonoBehaviour:
   jarakBergerak: 0
   prefabsExplosion: {fileID: 3688672606444755764, guid: 7a1d9741cb417c940889370fc4719cb9,
     type: 3}
+--- !u!70 &3275176368591017432
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3733418179543804849}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.015121298, y: 0.0013480728}
+  m_Size: {x: 0.44975755, y: 0.18014686}
+  m_Direction: 1

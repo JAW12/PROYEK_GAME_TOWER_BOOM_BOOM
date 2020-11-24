@@ -56,12 +56,12 @@ public class PeluruShooter : MonoBehaviour
                 }
             }         
         }
+    }
 
-        IEnumerator WaitForSeconds()
-        {
-            damage = false;
-            yield return new WaitForSecondsRealtime (3);
-            damage = true;
-        }
+    IEnumerator WaitForSeconds()
+    {
+        damage = false;
+        yield return new WaitForSecondsRealtime (3);
+        damage = true;
     }
 }

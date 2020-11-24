@@ -21,6 +21,7 @@ public class canvasGame : MonoBehaviour
     public float bombAOE;
     public bool sedangMengaturBom;
     public TextMeshProUGUI textHP;
+    public GameObject health;
     public TextMeshProUGUI textBombDamage, textBombAOE;
     public Button btnBuyBomb, btnUpgradeBomb;
 

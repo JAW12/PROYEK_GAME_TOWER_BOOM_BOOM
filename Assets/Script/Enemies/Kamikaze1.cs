@@ -16,8 +16,6 @@ public class Kamikaze1 : MonoBehaviour
     public GameObject prefabsExplosion;
     GameObject grupExplosion;
     bool kenaWall, kenaTower;
-    bool damage = true;
-
     bool sudahExplode;
 
     private int ctrColidding = 0;
@@ -67,7 +65,7 @@ public class Kamikaze1 : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //Debug.Log("Collision: " + other.name);
+        // Debug.Log("Collision: " + other.name);
         if (ctrColidding == 0)
         {
             ctrColidding = ctrColidding + 1;
@@ -76,12 +74,12 @@ public class Kamikaze1 : MonoBehaviour
             if (other.CompareTag("Walls"))
             {
                 kenaWall = true;
-                kamikazeExplode(other);
+                kamikazeExplode();
                 // Debug.Log("Kamikaze 1 kena wall. ctr : " + ctrColidding);
             }
             else if(other.CompareTag("Tower")){
                 kenaTower = true;
-                kamikazeExplode(other);
+                kamikazeExplode();
                 // Debug.Log("Kamikaze 1 kena tower. ctr : " + ctrColidding);
             }
         }
@@ -95,7 +93,7 @@ public class Kamikaze1 : MonoBehaviour
     }
 
 
-    private void kamikazeExplode(Collider2D other){
+    private void kamikazeExplode(){
         if (! sudahExplode)
         {
             sudahExplode = true;
@@ -112,21 +110,6 @@ public class Kamikaze1 : MonoBehaviour
             //atur parent explosion
             objExplosion.transform.parent = grupExplosion.transform;
         }
-        
-
-        if(other != null){
-            if(damage){
-                StartCoroutine (WaitForSeconds());
-                other.gameObject.GetComponent<diserang>().attacked(1.25f);
-            }
-        }
-    }
-
-    IEnumerator WaitForSeconds()
-    {
-        damage = false;
-        yield return new WaitForSecondsRealtime (3);    
-        damage = true;
     }
 
     private void OnDestroy()
