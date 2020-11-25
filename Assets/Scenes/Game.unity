@@ -3139,12 +3139,12 @@ MonoBehaviour:
   jenis: 3
   prefabsExplosion: {fileID: 3688672606444755764, guid: 7a1d9741cb417c940889370fc4719cb9,
     type: 3}
-  wooden_wall_0: {fileID: 0}
-  wooden_wall_1: {fileID: 0}
-  wooden_wall_2: {fileID: 0}
-  wooden_wall_3: {fileID: 0}
-  wooden_wall_4: {fileID: 0}
-  wooden_wall: []
+  wall_0: {fileID: 0}
+  wall_1: {fileID: 0}
+  wall_2: {fileID: 0}
+  wall_3: {fileID: 0}
+  wall_4: {fileID: 0}
+  wall: []
   hit: 0
 --- !u!1001 &742626283
 PrefabInstance:
@@ -5021,7 +5021,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d450b303a3e2094389c9191db2d0cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wall: {fileID: 5101537210895105320, guid: a3d4ad0ba870c8a47ae270f41f211c7a, type: 3}
+  wooden_wall: {fileID: 5101537210895105320, guid: a3d4ad0ba870c8a47ae270f41f211c7a,
+    type: 3}
+  stone_wall: {fileID: 5110353197137701795, guid: fdf2d44aecbcfea48b447e5ae9fb0abf,
+    type: 3}
+  large_stone_wall: {fileID: 2481991419415650963, guid: 0e05f4e688d97914b9eb2e519ecf820f,
+    type: 3}
   area: {fileID: 659685656}
   canvas: {fileID: 1969115190}
 --- !u!1 &1294851676

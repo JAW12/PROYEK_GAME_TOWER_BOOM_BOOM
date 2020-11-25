@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="large_stone_wall.png">
+	<!-- Created with Adobe Animate version 20.5.1.31044 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Symbol 1 instance 10000" x="0" y="0" width="512" height="512" pivotX="0" pivotY="0"/>
+	<SubTexture name="Symbol 1 instance 10001" x="512" y="0" width="512" height="512"/>
+	<SubTexture name="Symbol 1 instance 10002" x="1024" y="0" width="512" height="512"/>
+	<SubTexture name="Symbol 1 instance 10003" x="1536" y="0" width="512" height="512"/>
+	<SubTexture name="Symbol 1 instance 10004" x="0" y="512" width="512" height="512"/>
+</TextureAtlas>

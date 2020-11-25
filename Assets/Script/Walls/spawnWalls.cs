@@ -5,7 +5,10 @@ using UnityEngine;
 public class spawnWalls : MonoBehaviour
 {
     Vector3 mousePos;
-    public GameObject wall;
+    public GameObject wooden_wall;
+    public GameObject stone_wall;
+    public GameObject large_stone_wall;
+    GameObject wall;
     public GameObject area;
     bool can = true;
     public GameObject canvas;
@@ -25,6 +28,15 @@ public class spawnWalls : MonoBehaviour
             mousePos = Input.mousePosition;
 
             if(shop >= 0 && shop <= 2){
+                if(shop == 0){
+                    wall = wooden_wall;
+                }
+                else if(shop == 1){
+                    wall = stone_wall;
+                }
+                else if(shop == 2){
+                    wall = large_stone_wall;
+                }
                 RaycastHit hit = new RaycastHit();      
                 Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
                 if (Physics.Raycast(ray, out hit))

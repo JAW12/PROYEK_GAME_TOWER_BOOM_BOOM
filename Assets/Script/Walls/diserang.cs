@@ -17,23 +17,21 @@ public class diserang : MonoBehaviour
     GameObject grupExplosion;
     GameObject canvas;
 
-    public Sprite wooden_wall_0;
-    public Sprite wooden_wall_1;
-    public Sprite wooden_wall_2;
-    public Sprite wooden_wall_3;
-    public Sprite wooden_wall_4;
-    public Sprite[] wooden_wall;
+    public Sprite wall_0;
+    public Sprite wall_1;
+    public Sprite wall_2;
+    public Sprite wall_3;
+    public Sprite wall_4;
+    public Sprite[] wall;
 
     private void Start() {
         grupExplosion = GameObject.Find("GrupEnemies/GrupExplosion");
         canvas = GameObject.Find("Canvas");
-        wooden_wall = new Sprite[] {wooden_wall_0, wooden_wall_1, wooden_wall_2, wooden_wall_3, wooden_wall_4};
+        wall = new Sprite[] {wall_0, wall_1, wall_2, wall_3, wall_4};
     }
 
     private void changeSkin(int swap){
-        if(jenis == 0){
-            gameObject.GetComponent<SpriteRenderer>().sprite = wooden_wall[swap];
-        }
+        gameObject.GetComponent<SpriteRenderer>().sprite = wall[swap];
     }
 
     void Update(){
