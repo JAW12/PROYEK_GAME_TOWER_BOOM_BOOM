@@ -19,6 +19,9 @@ public class Kamikaze2 : MonoBehaviour
     bool kenaWall, kenaTower;
     bool sudahExplode;
 
+    //prefabs coin
+    public GameObject coin;
+
     private int ctrColidding = 0;
 
     void Start()
@@ -26,6 +29,7 @@ public class Kamikaze2 : MonoBehaviour
         //deklarasi
         grupExplosion = GameObject.Find("GrupEnemies/GrupExplosion");
         canvas = GameObject.Find("Canvas");
+        coin = GameObject.Find("1024x128_0");
 
         //waktu gerak nanti yg berubah adalah posisi gameobject parent nya
         parent = gameObject.transform.parent;
@@ -106,6 +110,11 @@ public class Kamikaze2 : MonoBehaviour
 
             //hancurkan kamikaze
             Destroy(gameObject);
+
+            //buat coin
+            GameObject tmpObj = Instantiate(coin);
+            spawnWalls.squares.Add(tmpObj);
+            tmpObj.transform.position = posisiKamikaze;
 
             //munculkan explosion
             GameObject objExplosion = Instantiate(

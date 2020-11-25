@@ -18,14 +18,17 @@ public class Kamikaze1 : MonoBehaviour
     GameObject canvas;
     bool kenaWall, kenaTower;
     bool sudahExplode;
-
     private int ctrColidding = 0;
+
+    //prefabs coin
+    public GameObject coin;
 
     void Start()
     {        
         //deklarasi
         grupExplosion = GameObject.Find("GrupEnemies/GrupExplosion");
         canvas = GameObject.Find("Canvas");
+        coin = GameObject.Find("1024x128_0");
 
         //waktu gerak nanti yg berubah adalah posisi gameobject parent nya
         parent = gameObject.transform.parent;
@@ -51,6 +54,7 @@ public class Kamikaze1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if(canvas.GetComponent<canvasGame>().isPaused == false){
             if (kenaTower == false && kenaWall == false)
             {
@@ -107,6 +111,11 @@ public class Kamikaze1 : MonoBehaviour
 
             //hancurkan kamikaze
             Destroy(gameObject);
+
+            //buat coin
+            GameObject tmpObj = Instantiate(coin);
+            spawnWalls.squares.Add(tmpObj);
+            tmpObj.transform.position = posisiKamikaze;
 
             //munculkan explosion
             GameObject objExplosion = Instantiate(
