@@ -46,7 +46,7 @@ public class diserang : MonoBehaviour
         if(musuhNabrak){
             //buat coin
             GameObject tmpObj = Instantiate(coin);
-            spawnWalls.squares.Add(tmpObj);
+            SpawnCoins.squares.Add(tmpObj);
             tmpObj.transform.position = posisiMeledak;
 
             //reset

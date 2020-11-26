@@ -12,12 +12,18 @@ public class EnemyBehaviour : MonoBehaviour
     //untuk healthbar
     public HealthBarBehaviour HealthBarBehaviour;
 
+    //prefabs coin
+    public GameObject coin;
+
+
     private void Start()
     {
         hp = maxhp;
 
         //atur healthbar setiap terjadi perubahan hp
         HealthBarBehaviour.SetHealth(hp, maxhp);
+
+        coin = GameObject.Find("1024x128_0");
     }
     
     public void takeHit(float damage){
@@ -29,6 +35,10 @@ public class EnemyBehaviour : MonoBehaviour
         if (hp <= 0)
         {
             hp = 0;
+            //buat coin
+            GameObject tmpObj = Instantiate(coin);
+            SpawnCoins.squares.Add(tmpObj);
+            tmpObj.transform.position = gameObject.transform.position;
             Destroy(gameObject);
         }
         else{

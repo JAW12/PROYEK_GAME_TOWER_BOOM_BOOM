@@ -124,7 +124,7 @@ public class Kamikaze2 : MonoBehaviour
 
             //buat coin
             GameObject tmpObj = Instantiate(coin);
-            spawnWalls.squares.Add(tmpObj);
+            SpawnCoins.squares.Add(tmpObj);
             tmpObj.transform.position = posisiKamikaze;
 
             //munculkan explosion

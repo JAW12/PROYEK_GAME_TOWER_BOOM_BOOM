@@ -14,7 +14,7 @@ public class SpawnCoins : MonoBehaviour
     bool releasedbutton;
     Vector3 mousePos;
 
-    List<GameObject> squares;
+    public static List<GameObject> squares;
 
     public TextMeshProUGUI score_txt;
 
@@ -24,6 +24,7 @@ public class SpawnCoins : MonoBehaviour
         squares = new List<GameObject>();
         releasedbutton = true;
         canplace = false;
+        //text = this.gameObject.transform.GetChild(0).GetChild(0).gameObject;
     }
 
     // Update is called once per frame
@@ -47,6 +48,8 @@ public class SpawnCoins : MonoBehaviour
                     int score = int.Parse(score_txt.text);
                     score += 1;
                     score_txt.text = score.ToString();
+                    GameObject sound = GameObject.Find("Main Camera");
+                    sound.GetComponent<SoundEffect>().playSound(0, false, 1f);
                     squares.Remove(square);
                     DestroyImmediate(square);
                     canplace = false;
@@ -54,22 +57,22 @@ public class SpawnCoins : MonoBehaviour
             }
             
         }
-        if(Input.GetMouseButtonUp(0))
-        {
-            releasedbutton = true;
-            canplace = false;
-        }
+        // if(Input.GetMouseButtonUp(0))
+        // {
+        //     releasedbutton = true;
+        //     canplace = false;
+        // }
            
-        if(releasedbutton == false && canplace)
-        {
-            GameObject tmpObj = Instantiate(coin);
+        // if(releasedbutton == false && canplace)
+        // {
+        //     GameObject tmpObj = Instantiate(coin);
             
-            squares.Add(tmpObj);
+        //     squares.Add(tmpObj);
 
-            tmpObj.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10));
-            canplace = false;
+        //     tmpObj.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10));
+        //     canplace = false;
 
-        }
+        // }
 
     }
 }

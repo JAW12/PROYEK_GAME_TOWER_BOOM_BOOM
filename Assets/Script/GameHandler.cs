@@ -17,7 +17,10 @@ public class GameHandler : MonoBehaviour
     public bool modeTutorial;
 
     GameObject grupShooter, grupKamikaze1, grupKamikaze2;
-    
+
+    //boss
+    GameObject grupboss;
+
     public Vector2 lokasiStartSpawn;
 
     //timer
@@ -29,6 +32,8 @@ public class GameHandler : MonoBehaviour
     int maxJumlahKamikaze;
     int minJumlahKamikaze;
 
+    bool cekMunculBoss = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +41,8 @@ public class GameHandler : MonoBehaviour
         grupShooter = GameObject.Find("GrupEnemies/GrupShooter");
         grupKamikaze1 = GameObject.Find("GrupEnemies/GrupKamikaze1");
         grupKamikaze2 = GameObject.Find("GrupEnemies/GrupKamikaze2");
-
+        grupboss = GameObject.Find("GrupEnemies/Boss");
+        grupboss.SetActive(false);
         setKondisiAwalGame();
     }
 
@@ -134,8 +140,9 @@ public class GameHandler : MonoBehaviour
 
         //kalo sudah stage final (stage 5) baru bos muncul
         //selain bos, kamikaze dan shooter juga muncul
-        if (stage == 5)
+        if (stage == 5 && !cekMunculBoss)
         {
+            cekMunculBoss = true;
             spawnBoss();
         }
 
@@ -268,7 +275,7 @@ public class GameHandler : MonoBehaviour
                 
                 //empty.transform.parent = grupShooter.transform;
             }
-    
+
             //buat empty gameobject sbg parent dari prefabs musuh yg diinstantiate
             //objprefabs.transform.parent = empty.transform;
         }
@@ -276,6 +283,7 @@ public class GameHandler : MonoBehaviour
     
     //untuk munculin boss
     void spawnBoss(){
-        
+        grupboss.SetActive(true);
+        BossBehaviour.cekStartTimer = 2;
     }
 }
