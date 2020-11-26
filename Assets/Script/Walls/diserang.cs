@@ -24,10 +24,17 @@ public class diserang : MonoBehaviour
     public Sprite wall_4;
     public Sprite[] wall;
 
+    //untuk prefabs coin
+    public GameObject coin;
+    Vector2 posisiMeledak;
+
     private void Start() {
         grupExplosion = GameObject.Find("GrupEnemies/GrupExplosion");
         canvas = GameObject.Find("Canvas");
         wall = new Sprite[] {wall_0, wall_1, wall_2, wall_3, wall_4};
+
+        //coin
+        coin = GameObject.Find("1024x128_0");
     }
 
     private void changeSkin(int swap){
@@ -35,9 +42,26 @@ public class diserang : MonoBehaviour
     }
 
     void Update(){
+        //pengecekan musuh nabrak buat coin
+        if(musuhNabrak){
+            //buat coin
+            GameObject tmpObj = Instantiate(coin);
+            spawnWalls.squares.Add(tmpObj);
+            tmpObj.transform.position = posisiMeledak;
+
+            //reset
+            musuhNabrak = false;
+        }
+
+        
         if(hp <= 0 && jenis >= 0 && jenis <= 2){
             wallDestroyed();
         }
+    }
+
+    private void FixedUpdate()
+    {
+        
     }
 
     public int hit = 0;
@@ -70,18 +94,34 @@ public class diserang : MonoBehaviour
         StartCoroutine(WaitForSeconds());
     }
 
+    bool musuhNabrak;
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Kamikaze1"))
+        {
+            musuhNabrak = true;
+            kamikazeMeledak(other);
+        }
+        else if (other.CompareTag("Kamikaze2"))
+        {
+            musuhNabrak = true;
+            kamikazeMeledak(other);
+        }
+    }
+
     void OnTriggerExit2D(Collider2D other)
     {
         if(other.CompareTag("Kamikaze1")){
             if(hit == 0){
-                Debug.Log("kena serang kamikaze1");
+                //Debug.Log("kena serang kamikaze1");
                 hit = 1;
                 attacked(5f);
             }
         }
         else if(other.CompareTag("Kamikaze2")){
             if(hit == 0){
-                Debug.Log("kena serang kamikaze2");
+                //Debug.Log("kena serang kamikaze2");
                 hit = 1;
                 attacked(5f);
             }
@@ -96,5 +136,27 @@ public class diserang : MonoBehaviour
 
     private void wallDestroyed(){
         Destroy(gameObject.transform.parent.gameObject);
+    }
+
+    private void kamikazeMeledak(Collider2D musuh){
+        posisiMeledak = musuh.gameObject.transform.position;
+        // Vector2 posisiMeledak = gameObject.transform.position;
+
+        // //buat coin
+        // GameObject tmpObj = Instantiate(coin);
+        // spawnWalls.squares.Add(tmpObj);
+        // tmpObj.transform.position = posisiMeledak;
+
+        //munculkan explosion
+        GameObject objExplosion = Instantiate(
+            prefabsExplosion, posisiMeledak, 
+            Quaternion.identity
+        );
+
+        //atur parent explosion
+        objExplosion.transform.parent = grupExplosion.transform;
+
+        //hancurkan kamikaze
+        Destroy(musuh.gameObject);
     }
 }

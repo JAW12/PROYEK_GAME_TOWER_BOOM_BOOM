@@ -8,16 +8,20 @@ public class Bomb : MonoBehaviour
     public GameObject prefabsExplosion;
 
     GameObject canvasGame, grupExplosion;
-    GameObject damageAOE;
+    // GameObject damageAOE;
 
     Rigidbody2D rigidBodyBomb;
     Animator animator;
+    CircleCollider2D circleColliderBomb;
 
     bool isDropped;
-    float jarakAtasGame;
-    int bombDamage;
+    bool hasExploded;
 
-    public float fallSpeed = 8.0f;
+    float jarakAtasGame;
+    float bombDamage;
+    float bombAoeRadius;
+
+    //public float fallSpeed = 80.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -25,12 +29,23 @@ public class Bomb : MonoBehaviour
         canvasGame = GameObject.Find("Canvas");
         grupExplosion = GameObject.Find("GrupEnemies/GrupExplosion");
 
+        //komponen
         rigidBodyBomb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        circleColliderBomb = GetComponent<CircleCollider2D>();
         
         //deklarasi value awal
         isDropped = false;
+        hasExploded = false;
         bombDamage = canvasGame.GetComponent<canvasGame>().bombDamage;
+        bombAoeRadius = canvasGame.GetComponent<canvasGame>().bombAOE * 0.03f;
+
+        //atur radius bom
+        circleColliderBomb.radius = bombAoeRadius;
+
+        //offset y
+        float offsetY = bombAoeRadius - 0.15f;
+        circleColliderBomb.offset = new Vector2(0f, offsetY);
 
         //jarak spawn bom dengan menu atas
         jarakAtasGame = 1f;
@@ -44,7 +59,7 @@ public class Bomb : MonoBehaviour
             aturPosisi();
         }        
         else{
-            transform.Translate(Vector3.down * fallSpeed * Time.deltaTime, Space.World);
+            dropBomb();
         }
     }
 
@@ -70,6 +85,17 @@ public class Bomb : MonoBehaviour
         //isDropped = true;
     }
 
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        //kalo bom sudah jatuh ke tanah dia meledak
+        bombExplode();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        explosionDamage();
+    }
+
     private void cekMouseClicked(){
         //klik kiri mouse global
         if(Input.GetMouseButtonUp(0)){
@@ -82,8 +108,10 @@ public class Bomb : MonoBehaviour
             bool sedangMengaturBom = canvasGame.GetComponent<canvasGame>().sedangMengaturBom;
             if (sedangMengaturBom)
             {
-                Debug.Log("pos mouse y : " + mousePos.y);
-                if (mousePos.y <= jarakAtasGame)
+                //Debug.Log("pos mouse y : " + mousePos.y);
+                float batasAtas = jarakAtasGame - 2f;
+
+                if (mousePos.y <= batasAtas)
                 {
                     isDropped = true;
                 }
@@ -93,27 +121,25 @@ public class Bomb : MonoBehaviour
     }
 
     private void dropBomb(){
-        //kalikan desimal buat slow down falling speed
-        //rigidBodyBomb.velocity = rigidBodyBomb.velocity * 0.9f;
-
-        // rigidBodyBomb.mass = 1f;
-        // rigidBodyBomb.gravityScale = 1f;
-
-        
-
-        bombExplode();
+        //jatuhin bom
+        rigidBodyBomb.isKinematic = false;
 
         //atur supaya bisa beli bom lagi
         canvasGame.GetComponent<canvasGame>().sedangMengaturBom = false;
 
-        Debug.Log("bomb dropped");
+        //Debug.Log("bomb dropped");
     }
 
     private void bombExplode(){
+        hasExploded = true;
+
         //munculkan explosion
         GameObject objExplosion = Instantiate(
         prefabsExplosion, gameObject.transform.position, 
         Quaternion.identity);
+
+        //atur ukuran scale explosion
+        objExplosion.transform.localScale = new Vector3(4f, 4f, 4f);
 
         //atur parent explosion
         objExplosion.transform.parent = grupExplosion.transform;
@@ -122,12 +148,22 @@ public class Bomb : MonoBehaviour
         Destroy(gameObject.transform.parent.gameObject);
     }
 
-    void ExplosionDamage(Vector3 center, float radius)
+    void explosionDamage()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(center, radius);
+        var hitColliders = Physics2D.OverlapCircleAll(transform.position, bombAoeRadius);
         foreach (var hitCollider in hitColliders)
         {
-            GameObject hitGameObject = hitCollider.gameObject;
+            //splash damage : https://youtu.be/6YvEDbBjgAY
+            //kalo berada di episentrum bakalan dapat damage terbesar
+            var enemy = hitCollider.GetComponent<EnemyBehaviour>();
+            if (enemy)
+            {
+                var closestPoint = hitCollider.ClosestPoint(transform.position);
+                var distance = Vector3.Distance(closestPoint, transform.position);
+
+                var damagePercent = Mathf.InverseLerp(bombAoeRadius, 0, distance);
+                enemy.takeHit(damagePercent * bombDamage);
+            }
         }
     }
     

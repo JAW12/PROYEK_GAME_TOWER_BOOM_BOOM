@@ -32,8 +32,11 @@ public class Kamikaze2 : MonoBehaviour
         coin = GameObject.Find("1024x128_0");
 
         //waktu gerak nanti yg berubah adalah posisi gameobject parent nya
-        parent = gameObject.transform.parent;
-        posisiKamikaze = parent.gameObject.transform.position;
+        //parent = gameObject.transform.parent;
+        //posisiKamikaze = parent.gameObject.transform.position;
+
+        //jadinya ga pake empty gameobject sbg parent
+        posisiKamikaze = gameObject.transform.position;
         x = posisiKamikaze.x;
 
         setKondisiAwalKamikaze();
@@ -69,41 +72,49 @@ public class Kamikaze2 : MonoBehaviour
     {
         if(canvas.GetComponent<canvasGame>().isPaused == false){
             //atur posisi
-            parent.transform.position = posisiKamikaze;
+            //parent.transform.position = posisiKamikaze;
+            transform.position = posisiKamikaze;
         }
+
+        // if (kenaTower || kenaWall)
+        // {
+        //     kamikazeExplode();
+        // }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //Debug.Log("Collision: " + other.name);
-        if (ctrColidding == 0)
-        {
-            //cek apakah peluru mengenai walls / tower
-            if (other.CompareTag("Walls"))
-            {
-                kenaWall = true;
-                kamikazeExplode();
-                // Debug.Log("Kamikaze 2 kena wall. ctr : " + ctrColidding);
-            }
-            else if(other.CompareTag("Tower")){
-                kenaTower = true;
-                kamikazeExplode();
-                // Debug.Log("Kamikaze 2 kena tower. ctr : " + ctrColidding);
-            }
+        // Debug.Log("Collision: " + other.name);
+        // if (ctrColidding == 0)
+        // {
+            
 
-            ctrColidding = ctrColidding + 1;
-        }
+        //     ctrColidding = ctrColidding + 1;
+        // }
+
+        // //cek apakah peluru mengenai walls / tower
+        // if (other.CompareTag("Walls"))
+        // {
+        //     kenaWall = true;
+        //     //kamikazeExplode();
+        //     // Debug.Log("Kamikaze 2 kena wall. ctr : " + ctrColidding);
+        // }
+        // else if(other.CompareTag("Tower")){
+        //     kenaTower = true;
+        //     //kamikazeExplode();
+        //     // Debug.Log("Kamikaze 2 kena tower. ctr : " + ctrColidding);
+        // }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(ctrColidding == 1){
-            //ctrColidding = 0;
-        }
+        // if(ctrColidding == 1){
+        //     //ctrColidding = 0;
+        // }
     }
 
 
-    private void kamikazeExplode(){
+    public void kamikazeExplode(){
         if (! sudahExplode)
         {
             sudahExplode = true;
@@ -130,6 +141,6 @@ public class Kamikaze2 : MonoBehaviour
     private void OnDestroy()
     {
         //waktu kamikaze dihancurkan, hancurkan juga parent
-        Destroy(transform.parent.gameObject);
+        //Destroy(transform.parent.gameObject);
     }
 }

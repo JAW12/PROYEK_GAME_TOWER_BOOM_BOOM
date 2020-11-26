@@ -69,7 +69,7 @@ public class GameHandler : MonoBehaviour
                     spawnEnemiesByStageWave();                
 
                     //reset ctr timer
-                    Debug.Log("spawn enemies!");
+                    //Debug.Log("spawn enemies!");
                     detik = 5;
                 }
             }
@@ -131,7 +131,7 @@ public class GameHandler : MonoBehaviour
 
         //cek kalo shooter, x spawn lgsg muncul di layar        
         int ctr = 1;
-        bool validSpawn = true;;
+        bool validSpawn = true;
         if(jenisMusuh == "shooter"){
             ctr = grupShooter.transform.childCount + 1;
             double posX = 7.5 - ctr;
@@ -160,45 +160,79 @@ public class GameHandler : MonoBehaviour
         if (validSpawn)
         {
             //empty object untuk menampung prefabs
-            GameObject empty = new GameObject();
-            empty.transform.position = lokasiSpawn;
+            //GameObject empty = new GameObject();
+            //empty.transform.position = lokasiSpawn;
 
             //atur supaya empty object masuk ke grup musuh sesuai dengan jenisnya
-            GameObject prefabsMusuh = prefabsKamikaze1;
+            GameObject prefabsMusuh;
+            GameObject objprefabs;
+
+            //ubah posisi anchor location dari prefabs yg mau dibuat
+            // objprefabs = Instantiate(
+            //     prefabsMusuh, new Vector2(0f, 0f), 
+            //     Quaternion.identity);
+            
 
             if(jenisMusuh == "kamikaze1"){            
-                empty.transform.parent = grupKamikaze1.transform;
+                prefabsMusuh = prefabsKamikaze1;
+                objprefabs = Instantiate(
+                    prefabsMusuh, lokasiSpawn, 
+                    Quaternion.identity);
+
+                //set kondisi awal
+                 objprefabs.GetComponent<Kamikaze1>()
+                    .setKondisiAwalKamikaze();
+
+                //untuk dimasukkan ke dalam dunia game
+                //empty.name = jenisMusuh + "_" + ctr + "_created";
+                //objprefabs.name = jenisMusuh + "_" + (empty.transform.childCount + 1);
+                objprefabs.name = jenisMusuh + "_" + ctr + "_created";
+
+                //parent
+                objprefabs.transform.parent = grupKamikaze1.transform;
+
+                //empty.transform.parent = grupKamikaze2.transform;
             }
             else if (jenisMusuh == "kamikaze2")
             {
                 prefabsMusuh = prefabsKamikaze2;
-                empty.transform.parent = grupKamikaze2.transform;
+                objprefabs = Instantiate(
+                    prefabsMusuh, lokasiSpawn, 
+                    Quaternion.identity);
+
+                //set kondisi awal
+                 objprefabs.GetComponent<Kamikaze2>()
+                    .setKondisiAwalKamikaze();
+
+                //untuk dimasukkan ke dalam dunia game
+                //empty.name = jenisMusuh + "_" + ctr + "_created";
+                //objprefabs.name = jenisMusuh + "_" + (empty.transform.childCount + 1);
+                objprefabs.name = jenisMusuh + "_" + ctr + "_created";
+
+                //parent
+                objprefabs.transform.parent = grupKamikaze2.transform;
+
+                //empty.transform.parent = grupKamikaze2.transform;
             }
             else if(jenisMusuh == "shooter"){
-                prefabsMusuh = prefabsShooter;            
-                empty.transform.parent = grupShooter.transform;
-            }
-        
-            //ubah posisi anchor location dari prefabs yg mau dibuat
-            GameObject objprefabs = Instantiate(
-                prefabsMusuh, new Vector2(0f, 0f), 
-                Quaternion.identity);
-            
-            //set kondisi awal
-            if (jenisMusuh == "kamikaze1")
-            {
-                objprefabs.GetComponent<Kamikaze1>().setKondisiAwalKamikaze();
-            }
-            else if(jenisMusuh == "kamikaze2"){
-                objprefabs.GetComponent<Kamikaze2>().setKondisiAwalKamikaze();
-            }
-            
-            //buat empty gameobject sbg parent dari prefabs musuh yg diinstantiate
-            objprefabs.transform.parent = empty.transform;
+                prefabsMusuh = prefabsShooter;
+                objprefabs = Instantiate(
+                    prefabsMusuh, lokasiSpawn, 
+                    Quaternion.identity);    
 
-            //untuk dimasukkan ke dalam dunia game
-            empty.name = jenisMusuh + "_" + ctr + "_created";
-            objprefabs.name = jenisMusuh + "_" + (empty.transform.childCount + 1);
+                //untuk dimasukkan ke dalam dunia game
+                //empty.name = jenisMusuh + "_" + ctr + "_created";
+                //objprefabs.name = jenisMusuh + "_" + (empty.transform.childCount + 1);
+                objprefabs.name = jenisMusuh + "_" + ctr + "_created";
+
+                //parent
+                objprefabs.transform.parent = grupShooter.transform;
+                
+                //empty.transform.parent = grupShooter.transform;
+            }
+    
+            //buat empty gameobject sbg parent dari prefabs musuh yg diinstantiate
+            //objprefabs.transform.parent = empty.transform;
         }
     }
     

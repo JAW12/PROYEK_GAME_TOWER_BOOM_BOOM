@@ -11,13 +11,15 @@ public class canvasGame : MonoBehaviour
     // 0 -> wooden wall
     // 1 -> small stone wall
     // 2 -> large stone wall
-    // 3 -> bomb
+    // 3 -> beli bomb
 
     public int wallLvl = 0;
 
     //bom
-    public GameObject prefabsBom, grupBomb;
-    public int bombLvl, bombPrice, bombDamage;
+    public GameObject prefabsBom;
+    public GameObject grupBomb;
+    public int bombLvl, bombPrice;
+    public float bombDamage;
     public float bombAOE;
     public bool sedangMengaturBom;
     public TextMeshProUGUI textHP;
@@ -39,6 +41,9 @@ public class canvasGame : MonoBehaviour
 
     public Sprite imgUpStone;
     public Sprite imgMaxStone;
+
+    public Sprite imgUpBomb;
+    public Sprite imgMaxBomb;
 
     public GameObject panelCancel;
 
@@ -149,13 +154,13 @@ public class canvasGame : MonoBehaviour
         bombLvl = 1;
         bombPrice = 10;
         bombDamage = 10;
-        bombAOE = 2f;
+        bombAOE = 20f;
         sedangMengaturBom = false;
 
         //atur text
         setPanelTextStatusGame();
 
-        Debug.Log("init value");
+        //Debug.Log("init value");
     }
 
     public void buyBomb(){
@@ -177,7 +182,7 @@ public class canvasGame : MonoBehaviour
                 //aktifkan panel berisi button cancel
                 panelCancel.SetActive(true);
             }
-        }            
+        } 
     }
 
     private void makeBomb(){
@@ -205,13 +210,15 @@ public class canvasGame : MonoBehaviour
     public void upgradeBomb(){
         int coin = int.Parse(textCoin.text);
 
-        //hanya bisa upgrade kalo ga lagi ngatur bom dan level bom belum maxed out
-        if (! sedangMengaturBom && bombLvl < 5){
+        //hanya bisa upgrade kalo :
+        // - ga lagi ngatur bom 
+        // - level bom belum maxed out
+        if (sedangMengaturBom == false && bombLvl < 5){
             if (coin >= 10)
             {
                 //upgrade damage dan AOE
-                bombDamage += 10;
-                bombAOE += 2f;
+                bombDamage += 10f;
+                bombAOE += 5f;
 
                 //kurangi coin kalo coin cukup
                 coin -= 10;
@@ -219,6 +226,18 @@ public class canvasGame : MonoBehaviour
                 //atur text
                 textCoin.text = coin.ToString();
                 setPanelTextStatusGame();
+
+                //tambah level
+                bombLvl++;
+
+                //atur gambar
+                if (bombLvl < 5)
+                {
+                    btnUpgradeBomb.GetComponent<Image>().sprite = imgUpBomb;
+                }
+                else{
+                    btnUpgradeBomb.GetComponent<Image>().sprite = imgMaxBomb;
+                }                        
             }
         }        
     }
@@ -227,6 +246,7 @@ public class canvasGame : MonoBehaviour
     void Start()
     {
         initValueAwal();
+        textCoin.SetText(2000 + "");
         gameHandler.GetComponent<GameHandler>().setKondisiAwalGame();
         
         panelCancel.SetActive(false);
