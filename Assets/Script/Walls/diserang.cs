@@ -56,7 +56,9 @@ public class diserang : MonoBehaviour
         if(hp / max_hp < 0.2f){
             swap = 4;
         }
-        changeSkin(swap);
+        if(jenis != 3){
+            changeSkin(swap);
+        }
         if(jenis == 3){
             canvas.GetComponent<canvasGame>().textHP.text = hp.ToString() + "/100";
             var rect = canvas.GetComponent<canvasGame>().health.transform;

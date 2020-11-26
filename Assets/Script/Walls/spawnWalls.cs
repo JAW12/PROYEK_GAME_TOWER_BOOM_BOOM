@@ -32,7 +32,6 @@ public class spawnWalls : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-
             //cek ada coin
             foreach (GameObject square in squares)
             {

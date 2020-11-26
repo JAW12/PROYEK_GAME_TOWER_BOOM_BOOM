@@ -5252,7 +5252,7 @@ MonoBehaviour:
     type: 3}
   area: {fileID: 659685656}
   canvas: {fileID: 1969115190}
-  text: {fileID: 295023081}
+  text: {fileID: 0}
   textCoin: {fileID: 785481900}
 --- !u!114 &1255747442
 MonoBehaviour:
