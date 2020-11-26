@@ -57,7 +57,6 @@ public class Kamikaze1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if(canvas.GetComponent<canvasGame>().isPaused == false){
             if (kenaTower == false && kenaWall == false)
             {
@@ -65,8 +64,6 @@ public class Kamikaze1 : MonoBehaviour
                 posisiKamikaze.x = x;
             }
         }
-        //kurangi posisi kl masih blm meledak
-        
     }
 
     private void FixedUpdate()
@@ -76,11 +73,6 @@ public class Kamikaze1 : MonoBehaviour
             //parent.transform.position = posisiKamikaze;
             transform.position = posisiKamikaze;
         }
-
-        // if (kenaTower || kenaWall)
-        // {
-        //     kamikazeExplode();
-        // }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

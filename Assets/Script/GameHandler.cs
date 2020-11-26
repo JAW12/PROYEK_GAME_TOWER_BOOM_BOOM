@@ -5,14 +5,14 @@ using UnityEngine;
 public class GameHandler : MonoBehaviour
 {
     /* == KONSEP STAGE WAVE GAME == 
-     * tiap stage (selain stage boss) masing2 punya 3 wave sebelum dia ganti jd next stage
+     * tiap stage (selain stage boss) masing2 punya 5 wave sebelum dia ganti jd next stage
      * kalo stage boss wave nya jalan terus
     */
 
     public GameObject canvasGame;
     
     public GameObject prefabsKamikaze1, prefabsKamikaze2, prefabsShooter;
-    public int stage, stageWave;
+    public int stage, stageWave, maxStageWave;
 
     public bool modeTutorial;
 
@@ -22,7 +22,12 @@ public class GameHandler : MonoBehaviour
 
     //timer
     float detik;
+    float jarakWaktuNextWave;
     bool sedangJalan;
+
+    //stage difficulty
+    int maxJumlahKamikaze;
+    int minJumlahKamikaze;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +49,8 @@ public class GameHandler : MonoBehaviour
         //init variable stage
         stage = canvasGame.GetComponent<canvasGame>().stage;
         stageWave = 1;
+        maxStageWave = 10;
+        jarakWaktuNextWave = 10;
         modeTutorial = false;
 
         //deklarasi kondisi awal timer
@@ -56,9 +63,11 @@ public class GameHandler : MonoBehaviour
     {
         if (modeTutorial == false)
         {
-            //setiap 5 detik sekali spawn musuh
+            //setiap beberapa detik sekali spawn musuh (detik sesuai jarakWaktuNextWave)
             if (sedangJalan)
             {
+                setStageDifficulty();
+                
                 if (detik > 0)
                 {
                     detik -= Time.deltaTime;
@@ -70,22 +79,50 @@ public class GameHandler : MonoBehaviour
 
                     //reset ctr timer
                     //Debug.Log("spawn enemies!");
-                    detik = 5;
+                    detik = jarakWaktuNextWave;
                 }
             }
         }
         
     }
 
+    void setStageDifficulty(){
+        //cek jumlah max kamikaze yang bisa muncul
+        //kalo di bawah stage 3, jumlah max yang bisa muncul cuma 5
+        maxJumlahKamikaze = 7;
+        minJumlahKamikaze = 2;
+
+        if(stage == 1){
+            minJumlahKamikaze = 2;
+            maxJumlahKamikaze = 5;
+
+            jarakWaktuNextWave = 10;
+        }
+        else if(stage >= 2 && stage <= 3){
+            minJumlahKamikaze = 4;
+            maxJumlahKamikaze = 10;
+
+            jarakWaktuNextWave = 7;
+        }
+        else{
+            jarakWaktuNextWave = 5;
+        }
+    }
+
     void spawnEnemiesByStageWave(){
         //cek stage
         if(stage >= 1){
-            int jumlahKamikazeSpawned = 2 * (stageWave + 1);
+            int jumlahKamikazeSpawned = stageWave / 2 + stage;
 
-            //max kamikaze yg bisa dispawn adalah 7
-            if (jumlahKamikazeSpawned > 7)
+            //atur minimal jumlah kamikaze dispawn
+            if(jumlahKamikazeSpawned < minJumlahKamikaze){
+                jumlahKamikazeSpawned = minJumlahKamikaze;
+            }
+            
+            //atur jumlah max kamikaze yg bisa dispawn
+            if (jumlahKamikazeSpawned > maxJumlahKamikaze)
             {
-                jumlahKamikazeSpawned = 7;
+                jumlahKamikazeSpawned = maxJumlahKamikaze;
             }
             spawnKamikazes(jumlahKamikazeSpawned);
         }
@@ -104,7 +141,8 @@ public class GameHandler : MonoBehaviour
 
         //cek penambahan stage
         stageWave++;
-        if(stage <= 4 && stageWave > 3){
+        if(stage <= 4 && stageWave > maxStageWave){
+            //cek berganti kalo sudah terjadi 5 wave di dalam stage tsb
             stage++;
             stageWave = 1;
 
@@ -113,7 +151,7 @@ public class GameHandler : MonoBehaviour
             canvasGame.GetComponent<canvasGame>().setPanelTextStatusGame();
         }
         else{
-            stageWave = 3;
+            stageWave = maxStageWave;
         }
     }
 

@@ -157,6 +157,9 @@ public class canvasGame : MonoBehaviour
         bombAOE = 20f;
         sedangMengaturBom = false;
 
+        //atur coin        
+        textCoin.SetText(100 + "");
+
         //atur text
         setPanelTextStatusGame();
 
@@ -246,7 +249,6 @@ public class canvasGame : MonoBehaviour
     void Start()
     {
         initValueAwal();
-        textCoin.SetText(2000 + "");
         gameHandler.GetComponent<GameHandler>().setKondisiAwalGame();
         
         panelCancel.SetActive(false);
