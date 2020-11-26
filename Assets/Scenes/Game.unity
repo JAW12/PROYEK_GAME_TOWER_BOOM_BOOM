@@ -4862,6 +4862,7 @@ MonoBehaviour:
     type: 3}
   stage: 0
   stageWave: 0
+  maxStageWave: 0
   modeTutorial: 0
   lokasiStartSpawn: {x: 0, y: 0}
 --- !u!1 &1321678534
