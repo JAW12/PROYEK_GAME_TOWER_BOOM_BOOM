@@ -67,6 +67,9 @@ public class diserang : MonoBehaviour
     public int hit = 0;
     public void attacked(float damage){
         hp -= damage;
+        if(hp < 0){
+            hp = 0;
+        }
         int swap = 0;
         if(hp / max_hp < 0.9f){
             swap = 1;
@@ -87,7 +90,11 @@ public class diserang : MonoBehaviour
             canvas.GetComponent<canvasGame>().textHP.text = hp.ToString() + "/100";
             var rect = canvas.GetComponent<canvasGame>().health.transform;
             rect.transform.localScale = new Vector2(hp/100, rect.transform.localScale.y);
+            if(hp <= 0){
+                canvas.GetComponent<canvasGame>().gameOver();
+            }
         }
+        
         // if(jenis == 0){
         //     Debug.Log(hp);
         // }

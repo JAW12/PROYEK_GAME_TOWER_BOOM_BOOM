@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class canvasGame : MonoBehaviour
@@ -33,6 +34,7 @@ public class canvasGame : MonoBehaviour
     public GameObject gameHandler;
 
     public TextMeshProUGUI textCoin;
+    public TextMeshProUGUI textScore;
     public Button btnBuyWall;
     public Button btnUpgradeWall;
 
@@ -46,16 +48,23 @@ public class canvasGame : MonoBehaviour
     public Sprite imgMaxBomb;
 
     public GameObject panelCancel;
-
+    public GameObject panelPause;
     public bool isPaused = false;
+    public Button btnSound;
+
+    public GameObject panelGameOver;
+    public TextMeshProUGUI textCoinGO;
+    public TextMeshProUGUI textScoreGO;
+
+
     // Start is called before the first frame update
     public void pause(){
         if(isPaused){
-            Time.timeScale = 1;
+            panelPause.GetComponent<Animator>().SetBool("open", false);
             isPaused = false;
         }
         else{
-            Time.timeScale = 0;
+            panelPause.GetComponent<Animator>().SetBool("open", true);
             isPaused = true;
         }
     }
@@ -70,7 +79,7 @@ public class canvasGame : MonoBehaviour
     }
 
     public void buyWall(){
-        if(shop < 0 || shop > 2){
+        if(shop < 0){
             int coin = int.Parse(textCoin.text);
             if(wallLvl == 0){
                 if(coin >= 5){
@@ -250,13 +259,36 @@ public class canvasGame : MonoBehaviour
     {
         initValueAwal();
         gameHandler.GetComponent<GameHandler>().setKondisiAwalGame();
-        
         panelCancel.SetActive(false);
+        if(staticResources.Instance() != null){
+            btnSound.GetComponent<Image>().sprite = gameObject.GetComponent<SoundEffect>().getSprite();
+        }
+        GetComponent<SoundEffect>().playSound(0, true, 1f);
     }
 
     // Update is called once per frame
     void Update()
     {
         // Debug.Log("stage : " + stage);
+    }
+
+    public void backToHome(){
+        SceneManager.LoadScene("Menu");
+    }
+
+    public void gameOver(){
+        Time.timeScale = 0;
+        isPaused = true;
+        textCoinGO.text = textCoin.text;
+        textScoreGO.text = textScore.text;
+        panelGameOver.GetComponent<Animator>().SetBool("open", true);
+        // GetComponent<SoundEffect>().playSound(1, false, 1f);
+        GetComponent<SoundEffect>().playSound(2, false, 1f);
+    }
+
+    public void restart(){
+        SceneManager.LoadScene("Game");
+        Time.timeScale = 1;
+        isPaused = false;
     }
 }

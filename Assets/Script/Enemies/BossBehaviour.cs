@@ -22,7 +22,7 @@ public class BossBehaviour : MonoBehaviour
         hp = maxhp;
 
         //atur healthbar setiap terjadi perubahan hp
-        HealthBarBehaviour.SetHealth(hp, maxhp);
+        // HealthBarBehaviour.SetHealth(hp, maxhp);
         currentTime = startingTime;
     }
 

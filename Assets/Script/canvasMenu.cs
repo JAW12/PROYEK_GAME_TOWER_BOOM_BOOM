@@ -1,30 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class canvasMenu : MonoBehaviour
 {
     public GameObject panelHelp;
     public GameObject panelMenu;
+
+    public Button btnSound;
     
     // Start is called before the first frame update
     void Start()
     {
         panelHelp.SetActive(false);
+        if(staticResources.Instance() != null){
+            btnSound.GetComponent<Image>().sprite = gameObject.GetComponent<SoundEffect>().getSprite();
+        }
+        GetComponent<SoundEffect>().playSound(0, false, 0.2f);
+        Debug.Log("played");
     }
 
     public void showHelp(){
         panelHelp.SetActive(true);
-    }
-
-    public void closeHelp(){
-        panelHelp.SetActive(false);
+        panelHelp.GetComponent<Animator>().SetBool("open", true);
     }
 
     public void startGame(){
         // SceneManager.LoadScene("Tutorial");
         SceneManager.LoadScene("Game");
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame

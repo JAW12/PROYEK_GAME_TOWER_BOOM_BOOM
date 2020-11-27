@@ -13,7 +13,7 @@ public class closeHelp : MonoBehaviour
                 panel.GetComponent<RectTransform>(), 
                 Input.mousePosition, 
                 Camera.main)) {
-            panel.SetActive(false);
+            panel.GetComponent<Animator>().SetBool("open", false);
         }
     }
 }
