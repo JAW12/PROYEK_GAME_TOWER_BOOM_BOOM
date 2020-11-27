@@ -156,7 +156,7 @@ public class Bomb : MonoBehaviour
             //splash damage : https://youtu.be/6YvEDbBjgAY
             //kalo berada di episentrum bakalan dapat damage terbesar
             var enemy = hitCollider.GetComponent<EnemyBehaviour>();
-            var boss = hitCollider.GetComponent<BossBehaviour>();
+            // var boss = hitCollider.GetComponent<BossBehaviour>();
             if (enemy)
             {
                 var closestPoint = hitCollider.ClosestPoint(transform.position);
@@ -165,14 +165,14 @@ public class Bomb : MonoBehaviour
                 var damagePercent = Mathf.InverseLerp(bombAoeRadius, 0, distance);
                 enemy.takeHit(damagePercent * bombDamage);
             }
-            if (boss)
-            {
-                var closestPoint = hitCollider.ClosestPoint(transform.position);
-                var distance = Vector3.Distance(closestPoint, transform.position);
+            // if (boss)
+            // {
+            //     var closestPoint = hitCollider.ClosestPoint(transform.position);
+            //     var distance = Vector3.Distance(closestPoint, transform.position);
 
-                var damagePercent = Mathf.InverseLerp(bombAoeRadius, 0, distance);
-                boss.takeHit(damagePercent * bombDamage);
-            }
+            //     var damagePercent = Mathf.InverseLerp(bombAoeRadius, 0, distance);
+            //     boss.takeHit(damagePercent * bombDamage);
+            // }
         }
     }
     

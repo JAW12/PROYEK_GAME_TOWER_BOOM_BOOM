@@ -10,9 +10,9 @@ public class BossBehaviour : MonoBehaviour
     // Start is called before the first frame update
 
     float hp;
-    float maxhp = 100;
+    float maxhp = 120;
     //untuk healthbar
-    public HealthBarBehaviour HealthBarBehaviour;
+    public BossHealthBarBehaviour HealthBarBehaviour;
 
     public GameObject wallParent;
 
@@ -53,7 +53,8 @@ public class BossBehaviour : MonoBehaviour
     {
         if(cekStartTimer != 1){
             currentTime -= 1 * Time.deltaTime;
-            Debug.Log(currentTime);
+            //Debug.Log(currentTime);
+            takeHit(1);
         }
         if(currentTime < 1){
             currentTime = startingTime;

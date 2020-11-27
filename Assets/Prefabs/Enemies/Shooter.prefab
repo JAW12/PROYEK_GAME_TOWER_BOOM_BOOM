@@ -421,6 +421,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthBarBehaviour: {fileID: 4631922861355928188}
+  coin: {fileID: 0}
+  jenisMusuh: Shooter
 --- !u!1 &6881931615045720894
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,3 +539,4 @@ MonoBehaviour:
   HighColor: {r: 0.99607843, g: 0.9411765, b: 0.003921569, a: 0}
   LowColor: {r: 1, g: 0, b: 0, a: 1}
   Offset: {x: 0, y: 0, z: 0}
+  jenisMusuh: Shooter

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarBehaviour : MonoBehaviour
+public class BossHealthBarBehaviour : MonoBehaviour
 {
     //healthbar : https://youtu.be/v1UGTTeQzbo
 
@@ -11,8 +11,6 @@ public class HealthBarBehaviour : MonoBehaviour
     public Color HighColor;
     public Color LowColor;
     public Vector3 Offset;
-
-    public string jenisMusuh;
 
     public void SetHealth(float health, float maxHealth){
         //munculin hp kalo hp sudah berkurang dari max health
@@ -33,10 +31,7 @@ public class HealthBarBehaviour : MonoBehaviour
     private void Start()
     {
         //biar healthbar agak naik dikit
-        if(jenisMusuh == "Boss")
-                Offset = new Vector3(0f, 0.9f, 0f);
-        else
-                Offset = new Vector3(0f, 0.4f, 0f);
+        Offset = new Vector3(0f, 0.9f, 0f);
     }
 
     void Update()
