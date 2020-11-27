@@ -10,7 +10,7 @@ public class BossBehaviour : MonoBehaviour
     // Start is called before the first frame update
 
     float hp;
-    float maxhp = 120;
+    float maxhp = 100;
     //untuk healthbar
     public HealthBarBehaviour HealthBarBehaviour;
 
@@ -22,8 +22,9 @@ public class BossBehaviour : MonoBehaviour
         hp = maxhp;
 
         //atur healthbar setiap terjadi perubahan hp
-        // HealthBarBehaviour.SetHealth(hp, maxhp);
+        HealthBarBehaviour.SetHealth(hp, maxhp);
         currentTime = startingTime;
+        takeHit(30);
     }
 
     public void takeHit(float damage){

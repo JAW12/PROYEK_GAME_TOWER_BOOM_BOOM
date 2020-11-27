@@ -52,7 +52,7 @@ public class PeluruShooter : MonoBehaviour
             if(collision != null && collision.gameObject != null){
                 if(damage){
                     StartCoroutine (WaitForSeconds());
-                    collision.gameObject.GetComponent<diserang>().attacked(1);
+                    collision.gameObject.GetComponent<diserang>().attacked(1f);
                 }
             }         
         }
