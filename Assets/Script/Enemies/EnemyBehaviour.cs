@@ -20,11 +20,14 @@ public class EnemyBehaviour : MonoBehaviour
 
     //prefabs coin
     public GameObject coin;
-    bool isDead;
+    public bool isDead;
 
     GameObject canvasGame;
 
     public string jenisMusuh;
+
+    //cek apakah script sudah dijalankan
+    bool isUsed;
 
     private void Start()
     {

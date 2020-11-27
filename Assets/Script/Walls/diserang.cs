@@ -107,16 +107,26 @@ public class diserang : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Kamikaze1"))
-        {
-            musuhNabrak = true;
-            kamikazeMeledak(other);
+        if(other.CompareTag("Kamikaze1") || other.CompareTag("Kamikaze2")){
+            EnemyBehaviour scriptEnemyBehaviour = other.GetComponent<EnemyBehaviour>();
+            if(! scriptEnemyBehaviour.isDead){
+                musuhNabrak = true;
+                kamikazeMeledak(other);
+
+                // if (other.CompareTag("Kamikaze1"))
+                // {
+                //     musuhNabrak = true;
+                //     kamikazeMeledak(other);
+                // }
+                // else if (other.CompareTag("Kamikaze2"))
+                // {
+                //     musuhNabrak = true;
+                //     kamikazeMeledak(other);
+                // }
+            }
+            
         }
-        else if (other.CompareTag("Kamikaze2"))
-        {
-            musuhNabrak = true;
-            kamikazeMeledak(other);
-        }
+        
     }
 
     void OnTriggerExit2D(Collider2D other)
