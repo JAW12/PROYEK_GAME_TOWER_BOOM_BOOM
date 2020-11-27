@@ -40,12 +40,12 @@ public class Bomb : MonoBehaviour
         bombDamage = canvasGame.GetComponent<canvasGame>().bombDamage;
         bombAoeRadius = canvasGame.GetComponent<canvasGame>().bombAOE * 0.03f;
 
-        //atur radius bom
-        circleColliderBomb.radius = bombAoeRadius;
+        //atur radius on trigger bom
+        //circleColliderBomb.radius = bombAoeRadius;
 
         //offset y
-        float offsetY = bombAoeRadius - 0.15f;
-        circleColliderBomb.offset = new Vector2(0f, offsetY);
+        //float offsetY = bombAoeRadius - 0.15f;
+        //circleColliderBomb.offset = new Vector2(0f, offsetY);
 
         //jarak spawn bom dengan menu atas
         jarakAtasGame = 1f;
@@ -57,9 +57,6 @@ public class Bomb : MonoBehaviour
         cekMouseClicked();
         if(! isDropped){
             aturPosisi();
-        }        
-        else{
-            dropBomb();
         }
     }
 
@@ -93,7 +90,7 @@ public class Bomb : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        explosionDamage();
+        //explosionDamage();
     }
 
     private void cekMouseClicked(){
@@ -126,8 +123,6 @@ public class Bomb : MonoBehaviour
 
         //atur supaya bisa beli bom lagi
         canvasGame.GetComponent<canvasGame>().sedangMengaturBom = false;
-
-        //Debug.Log("bomb dropped");
     }
 
     private void bombExplode(){
@@ -144,7 +139,21 @@ public class Bomb : MonoBehaviour
         //atur parent explosion
         objExplosion.transform.parent = grupExplosion.transform;
 
-        //langsung hancurkan parent empty gameobject dr prefabs saat ini
+        //damage explosion
+        explosionDamage();
+
+        //reset
+        canvasGame.GetComponent<canvasGame>().shop = -1;
+        canvasGame.GetComponent<canvasGame>().sedangMengaturBom = false;
+        canvasGame.GetComponent<canvasGame>().panelCancel.SetActive(false);
+
+        //hancurkan bom
+        Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        //hancurkan jg parent ny
         Destroy(gameObject.transform.parent.gameObject);
     }
 
@@ -165,6 +174,7 @@ public class Bomb : MonoBehaviour
                 var damagePercent = Mathf.InverseLerp(bombAoeRadius, 0, distance);
                 enemy.takeHit(damagePercent * bombDamage);
             }
+            
             // if (boss)
             // {
             //     var closestPoint = hitCollider.ClosestPoint(transform.position);

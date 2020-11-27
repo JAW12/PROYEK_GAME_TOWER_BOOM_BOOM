@@ -28,6 +28,9 @@ public class diserang : MonoBehaviour
     public GameObject coin;
     Vector2 posisiMeledak;
 
+    //cek
+    Collider2D musuhHit;
+
     private void Start() {
         grupExplosion = GameObject.Find("GrupEnemies/GrupExplosion");
         canvas = GameObject.Find("Canvas");
@@ -52,7 +55,6 @@ public class diserang : MonoBehaviour
             //reset
             musuhNabrak = false;
         }
-
         
         if(hp <= 0 && jenis >= 0 && jenis <= 2){
             wallDestroyed();
@@ -163,7 +165,6 @@ public class diserang : MonoBehaviour
         //atur parent explosion
         objExplosion.transform.parent = grupExplosion.transform;
 
-        //hancurkan kamikaze
-        Destroy(musuh.gameObject);
+        musuh.GetComponent<EnemyBehaviour>().takeHit(20);
     }
 }

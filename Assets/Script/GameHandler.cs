@@ -146,6 +146,9 @@ public class GameHandler : MonoBehaviour
             spawnBoss();
         }
 
+        //testing bos langsung muncul
+        //spawnBoss();
+
         //cek penambahan stage
         stageWave++;
         if(stage <= 4 && stageWave > maxStageWave){

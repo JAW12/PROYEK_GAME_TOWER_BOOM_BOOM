@@ -33,10 +33,12 @@ public class HealthBarBehaviour : MonoBehaviour
     private void Start()
     {
         //biar healthbar agak naik dikit
-        if(jenisMusuh == "Boss")
-                Offset = new Vector3(0f, 0.9f, 0f);
-        else
-                Offset = new Vector3(0f, 0.4f, 0f);
+        if(jenisMusuh == "Boss"){
+            Offset = new Vector3(0f, 0.9f, 0f);
+        }
+        else{
+            Offset = new Vector3(0f, 0.4f, 0f);
+        }
     }
 
     void Update()

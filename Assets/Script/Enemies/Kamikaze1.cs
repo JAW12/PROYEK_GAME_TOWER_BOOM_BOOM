@@ -23,9 +23,12 @@ public class Kamikaze1 : MonoBehaviour
     //prefabs coin
     public GameObject coin;
 
+    GameObject canvasGame;
+
     void Start()
     {        
         //deklarasi
+        canvasGame = GameObject.Find("Canvas");
         grupExplosion = GameObject.Find("GrupEnemies/GrupExplosion");
         canvas = GameObject.Find("Canvas");
         coin = GameObject.Find("1024x128_0");
@@ -105,27 +108,27 @@ public class Kamikaze1 : MonoBehaviour
 
 
     public void kamikazeExplode(){
-        if (! sudahExplode)
-        {
-            sudahExplode = true;
+        // if (! sudahExplode)
+        // {
+        //     sudahExplode = true;
 
-            //hancurkan kamikaze
-            Destroy(gameObject);
+        //     //buat coin
+        //     GameObject tmpObj = Instantiate(coin);
+        //     SpawnCoins.squares.Add(tmpObj);
+        //     tmpObj.transform.position = posisiKamikaze;
 
-            //buat coin
-            GameObject tmpObj = Instantiate(coin);
-            SpawnCoins.squares.Add(tmpObj);
-            tmpObj.transform.position = posisiKamikaze;
+        //     //munculkan explosion
+        //     GameObject objExplosion = Instantiate(
+        //         prefabsExplosion, posisiKamikaze, 
+        //         Quaternion.identity
+        //     );
 
-            //munculkan explosion
-            GameObject objExplosion = Instantiate(
-                prefabsExplosion, posisiKamikaze, 
-                Quaternion.identity
-            );
+        //     //atur parent explosion
+        //     objExplosion.transform.parent = grupExplosion.transform;
 
-            //atur parent explosion
-            objExplosion.transform.parent = grupExplosion.transform;
-        }
+        //     //kena damage
+        //     GetComponent<EnemyBehaviour>().takeHit(20);
+        // }
     }
 
     private void OnDestroy()

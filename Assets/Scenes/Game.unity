@@ -915,7 +915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.4117647}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -3091,8 +3091,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Slider: {fileID: 1657469495}
-  HighColor: {r: 1, g: 0.9878479, b: 0, a: 0}
-  LowColor: {r: 1, g: 0, b: 0, a: 0}
+  HighColor: {r: 1, g: 0.9878479, b: 0, a: 1}
+  LowColor: {r: 1, g: 0, b: 0, a: 1}
   Offset: {x: 0, y: 0, z: 0}
   jenisMusuh: Boss
 --- !u!1 &644405316
@@ -4889,6 +4889,7 @@ GameObject:
   - component: {fileID: 983948239}
   - component: {fileID: 983948241}
   - component: {fileID: 983948240}
+  - component: {fileID: 983948242}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -4976,6 +4977,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &983948242
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983948238}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.06961446, y: -0.0000008453677}
+  serializedVersion: 2
+  m_Radius: 0.43460917
 --- !u!1 &985525084
 GameObject:
   m_ObjectHideFlags: 0
