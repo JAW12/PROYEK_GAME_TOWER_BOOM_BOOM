@@ -8,13 +8,12 @@ public class canvasMenu : MonoBehaviour
 {
     public GameObject panelHelp;
     public GameObject panelMenu;
-
+    public GameObject panelExit;
     public Button btnSound;
     
     // Start is called before the first frame update
     void Start()
     {
-        panelHelp.SetActive(false);
         if(staticResources.Instance() != null){
             btnSound.GetComponent<Image>().sprite = gameObject.GetComponent<SoundEffect>().getSprite();
         }
@@ -23,13 +22,12 @@ public class canvasMenu : MonoBehaviour
     }
 
     public void showHelp(){
-        panelHelp.SetActive(true);
         panelHelp.GetComponent<Animator>().SetBool("open", true);
     }
 
     public void startGame(){
         // SceneManager.LoadScene("Tutorial");
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadSceneAsync("Loading");
         Time.timeScale = 1;
     }
 
@@ -37,5 +35,17 @@ public class canvasMenu : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void openExit(){
+        panelExit.GetComponent<Animator>().SetBool("open", true);
+    }
+
+    public void closeExit(){
+        panelExit.GetComponent<Animator>().SetBool("open", false);
+    }
+
+    public void exit(){
+        Application.Quit();
     }
 }
