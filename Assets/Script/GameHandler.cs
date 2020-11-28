@@ -19,7 +19,7 @@ public class GameHandler : MonoBehaviour
     GameObject grupShooter, grupKamikaze1, grupKamikaze2;
 
     //boss
-    GameObject grupboss;
+    GameObject grupboss,laserBoss;
 
     public Vector2 lokasiStartSpawn;
 
@@ -42,7 +42,9 @@ public class GameHandler : MonoBehaviour
         grupKamikaze1 = GameObject.Find("GrupEnemies/GrupKamikaze1");
         grupKamikaze2 = GameObject.Find("GrupEnemies/GrupKamikaze2");
         grupboss = GameObject.Find("GrupEnemies/Boss");
+        laserBoss = GameObject.Find("GrupEnemies/LaserBoss");
         grupboss.SetActive(false);
+        laserBoss.SetActive(false);
         setKondisiAwalGame();
     }
 
@@ -287,6 +289,6 @@ public class GameHandler : MonoBehaviour
     //untuk munculin boss
     void spawnBoss(){
         grupboss.SetActive(true);
-        BossBehaviour.cekStartTimer = 2;
+        EnemyBehaviour.cekStartTimer = 2;
     }
 }

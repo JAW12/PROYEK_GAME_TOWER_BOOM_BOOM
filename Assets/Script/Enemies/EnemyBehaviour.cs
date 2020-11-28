@@ -18,6 +18,13 @@ public class EnemyBehaviour : MonoBehaviour
     float maxhp;
     public HealthBarBehaviour HealthBarBehaviour;
 
+    public GameObject tower;
+
+    public GameObject laserBoss;
+
+    [SerializeField] private Animator bossLaser;
+    float towerHP;
+
     //prefabs coin
     public GameObject coin;
     public bool isDead;
@@ -35,7 +42,15 @@ public class EnemyBehaviour : MonoBehaviour
         canvasGame = GameObject.Find("Canvas");
 
         if(jenisMusuh == "Boss"){
-            maxhp = 120;
+            laserBoss = GameObject.Find("GrupEnemies/LaserBoss");
+        }
+
+        if(tower != null){
+            towerHP = tower.GetComponent<diserang>().hp;
+        }
+
+        if(jenisMusuh == "Boss"){
+            maxhp = 150;
         }
         else if(jenisMusuh == "Shooter"){
             maxhp = 30;
@@ -135,12 +150,20 @@ public class EnemyBehaviour : MonoBehaviour
         if(currentTime < 1){
             currentTime = startingTime;
             Debug.Log("Waktu habis");
+            bossLaser.SetBool("cekState",true);
+            laserBoss.SetActive(true);
+            float temp = towerHP * 30 / 100;
+            tower.GetComponent<diserang>().attacked(temp);
             GameObject wallParent = GameObject.Find("GrupWalls");
             
             for (int i = 0; i < wallParent.transform.childCount; i++)
             {
                 Destroy(wallParent.transform.GetChild(i).gameObject);
             }
+        }
+        if(currentTime == 3){
+            laserBoss.SetActive(false);
+            bossLaser.SetBool("cekState",false);
         }
     }
 }
