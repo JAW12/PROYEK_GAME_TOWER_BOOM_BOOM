@@ -56,6 +56,8 @@ public class canvasGame : MonoBehaviour
     public TextMeshProUGUI textCoinGO;
     public TextMeshProUGUI textScoreGO;
 
+    public TextMeshProUGUI textGameOver_Menang;
+
 
     // Start is called before the first frame update
     public void pause(){
@@ -284,6 +286,17 @@ public class canvasGame : MonoBehaviour
         panelGameOver.GetComponent<Animator>().SetBool("open", true);
         // GetComponent<SoundEffect>().playSound(1, false, 1f);
         GetComponent<SoundEffect>().playSound(2, false, 1f);
+    }
+
+    public void winGame(){
+        Time.timeScale = 0;
+        isPaused = true;
+        textCoinGO.text = textCoin.text;
+        textScoreGO.text = textScore.text;
+        textGameOver_Menang.text = "You Win";
+        panelGameOver.GetComponent<Animator>().SetBool("open", true);
+        // GetComponent<SoundEffect>().playSound(1, false, 1f);
+        GetComponent<SoundEffect>().playSound(3, false, 1f);
     }
 
     public void restart(){

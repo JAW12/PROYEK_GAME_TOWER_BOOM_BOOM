@@ -10580,6 +10580,7 @@ MonoBehaviour:
   panelGameOver: {fileID: 37050940}
   textCoinGO: {fileID: 154079826}
   textScoreGO: {fileID: 1286836823}
+  textGameOver_Menang: {fileID: 1865033970}
 --- !u!114 &1969115196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10596,6 +10597,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 015fad8a405eb694b84859749927c911, type: 3}
   - {fileID: 8300000, guid: d48a51ee25f1f344fa341c0f349091bd, type: 3}
   - {fileID: 8300000, guid: bd0aa55fbd5eeb849a5e7b5027e24aa1, type: 3}
+  - {fileID: 8300000, guid: d354d4a8f5809d94ca252b57255d0517, type: 3}
 --- !u!114 &1969115197
 MonoBehaviour:
   m_ObjectHideFlags: 0

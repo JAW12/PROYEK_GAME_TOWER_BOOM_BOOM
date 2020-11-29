@@ -47,10 +47,6 @@ public class diserang : MonoBehaviour
     void Update(){
         //pengecekan musuh nabrak buat coin
         if(musuhNabrak){
-            //buat coin
-            GameObject tmpObj = Instantiate(coin);
-            SpawnCoins.squares.Add(tmpObj);
-            tmpObj.transform.position = posisiMeledak;
 
             //reset
             musuhNabrak = false;

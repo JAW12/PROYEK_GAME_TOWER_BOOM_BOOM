@@ -36,6 +36,8 @@ public class EnemyBehaviour : MonoBehaviour
     //cek apakah script sudah dijalankan
     bool isUsed;
 
+    GameObject canvas;
+
     private void Start()
     {
         //init
@@ -68,6 +70,8 @@ public class EnemyBehaviour : MonoBehaviour
         //coin
         coin = GameObject.Find("1024x128_0");
         currentTime = startingTime;
+
+        canvas = GameObject.Find("Canvas");
     }
     
     public void takeHit(float damage){
@@ -107,6 +111,7 @@ public class EnemyBehaviour : MonoBehaviour
 
             //hancurkan objek
             if(jenisMusuh == "Boss"){
+                canvas.GetComponent<canvasGame>().winGame();
                 Debug.Log("BOS SUDAH MATI");
             }
             else{
@@ -161,7 +166,7 @@ public class EnemyBehaviour : MonoBehaviour
                 Destroy(wallParent.transform.GetChild(i).gameObject);
             }
         }
-        if(currentTime == 3){
+        if(currentTime == 58){
             laserBoss.SetActive(false);
             bossLaser.SetBool("cekState",false);
         }
