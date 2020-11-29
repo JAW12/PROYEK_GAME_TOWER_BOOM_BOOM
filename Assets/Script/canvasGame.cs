@@ -58,6 +58,9 @@ public class canvasGame : MonoBehaviour
 
     public TextMeshProUGUI textGameOver_Menang;
 
+    //tutorial
+    public bool modeTutorial;
+
 
     // Start is called before the first frame update
     public void pause(){
@@ -69,6 +72,10 @@ public class canvasGame : MonoBehaviour
             panelPause.GetComponent<Animator>().SetBool("open", true);
             isPaused = true;
         }
+    }
+
+    public void goToGame(){
+        SceneManager.LoadScene("Game");
     }
 
     public void setPanelTextStatusGame(){
@@ -105,6 +112,9 @@ public class canvasGame : MonoBehaviour
                 }
             }
             textCoin.text = coin.ToString();
+            if(modeTutorial == true){
+                GameHandler.cekBeliWall = true;
+            }
         }
     }
 

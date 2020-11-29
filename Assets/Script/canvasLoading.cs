@@ -12,7 +12,8 @@ public class canvasLoading : MonoBehaviour
     private IEnumerator Start()
     {
         yield return new WaitForSeconds(2.7f);
-        SceneManager.LoadScene("Game");
+        //SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Tutorial");
     }
 
     private void Update() {

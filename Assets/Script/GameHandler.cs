@@ -14,8 +14,6 @@ public class GameHandler : MonoBehaviour
     public GameObject prefabsKamikaze1, prefabsKamikaze2, prefabsShooter;
     public int stage, stageWave, maxStageWave;
 
-    public bool modeTutorial;
-
     GameObject grupShooter, grupKamikaze1, grupKamikaze2;
 
     //boss
@@ -33,6 +31,10 @@ public class GameHandler : MonoBehaviour
     int minJumlahKamikaze;
 
     bool cekMunculBoss = false;
+
+    //tutorial
+    public bool modeTutorial;
+    public static bool cekBeliWall = false, cekBeliBomb = false;
 
     // Start is called before the first frame update
     void Start()
@@ -59,7 +61,7 @@ public class GameHandler : MonoBehaviour
         stageWave = 1;
         maxStageWave = 10;
         jarakWaktuNextWave = 10;
-        modeTutorial = false;
+        //modeTutorial = false;
 
         //deklarasi kondisi awal timer
         sedangJalan = true;
@@ -91,7 +93,15 @@ public class GameHandler : MonoBehaviour
                 }
             }
         }
-        
+        else{
+            if (sedangJalan && cekBeliWall && !cekBeliBomb)
+            {
+                spawnKamikazes(1);
+            }
+            else if(sedangJalan && cekBeliWall && cekBeliBomb){
+                spawnEnemyByType("shooter");
+            }
+        }
     }
 
     void setStageDifficulty(){
