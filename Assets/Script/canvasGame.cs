@@ -206,6 +206,9 @@ public class canvasGame : MonoBehaviour
                 //aktifkan panel berisi button cancel
                 panelCancel.SetActive(true);
             }
+            if(modeTutorial == true){
+                GameHandler.cekBeliBomb = true;
+            }
         } 
     }
 
