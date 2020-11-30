@@ -60,6 +60,9 @@ public class canvasGame : MonoBehaviour
 
     //tutorial
     public bool modeTutorial;
+    public TextMeshProUGUI textTutorial;
+
+    bool beliWall=false,upWall=false,beliBomb=false,upBomb=false;
 
 
     // Start is called before the first frame update
@@ -84,7 +87,10 @@ public class canvasGame : MonoBehaviour
         textBombAOE.text = bombAOE.ToString();     
 
         //status stage
-        textStage.text = "Stage #" + stage.ToString();
+        if(modeTutorial == false)
+            textStage.text = "Stage #" + stage.ToString();
+        else
+            textStage.text = "Stage Tutorial";
     }
 
     public void buyWall(){
@@ -114,6 +120,10 @@ public class canvasGame : MonoBehaviour
             textCoin.text = coin.ToString();
             if(modeTutorial == true){
                 GameHandler.cekBeliWall = true;
+                if(beliWall == false){
+                    textTutorial.text = "Click on the second button to upgrade the wall";
+                    beliWall = true;
+                }
             }
         }
     }
@@ -137,6 +147,13 @@ public class canvasGame : MonoBehaviour
                 }
             }
             textCoin.text = coin.ToString();
+            if(modeTutorial == true){
+                GameHandler.cekBeliWall = true;
+                if(upWall == false){
+                    textTutorial.text = "Click on the third button to buy a bomb";
+                    upWall = true;
+                }
+            }
     }
 
     public void cancel(){
@@ -208,6 +225,10 @@ public class canvasGame : MonoBehaviour
             }
             if(modeTutorial == true){
                 GameHandler.cekBeliBomb = true;
+                if(beliBomb == false){
+                    textTutorial.text = "Click on the last button to upgrage the bomb";
+                    beliBomb = true;
+                }
             }
         } 
     }
@@ -265,6 +286,13 @@ public class canvasGame : MonoBehaviour
                 else{
                     btnUpgradeBomb.GetComponent<Image>().sprite = imgMaxBomb;
                 }                        
+            }
+        }
+        if(modeTutorial == true){
+            GameHandler.cekBeliBomb = true;
+            if(upBomb == false){
+                textTutorial.text = "Click the → button to go to the game";
+                upBomb = true;
             }
         }        
     }

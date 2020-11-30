@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameHandler : MonoBehaviour
 {
@@ -94,12 +96,14 @@ public class GameHandler : MonoBehaviour
             }
         }
         else{
-            if (sedangJalan && cekBeliWall && !cekBeliBomb)
+            if (sedangJalan && cekBeliWall)
             {
                 spawnKamikazes(1);
+                cekBeliWall = false;
             }
-            else if(sedangJalan && cekBeliWall && cekBeliBomb){
+            else if(sedangJalan && cekBeliBomb){
                 spawnEnemyByType("shooter");
+                cekBeliBomb = false;
             }
         }
     }

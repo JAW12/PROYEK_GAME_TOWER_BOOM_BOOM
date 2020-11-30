@@ -46,7 +46,7 @@ public class SpawnCoins : MonoBehaviour
                     tmpObj.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10));
                     tmpObj.GetComponent<Renderer>().sortingLayerID = SortingLayer.NameToID("ForegroundLayer");
                     int score = int.Parse(score_txt.text);
-                    score += 1;
+                    score += int.Parse(square.name.ToString());
                     score_txt.text = score.ToString();
                     GameObject sound = GameObject.Find("Main Camera");
                     sound.GetComponent<SoundEffect>().playSound(0, false, 1f);

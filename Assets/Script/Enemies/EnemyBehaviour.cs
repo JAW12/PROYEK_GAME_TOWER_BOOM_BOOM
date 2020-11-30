@@ -104,18 +104,27 @@ public class EnemyBehaviour : MonoBehaviour
             hp = 0;
             isDead = true;
            
-            //buat coin
-            GameObject tmpObj = Instantiate(coin);
-            SpawnCoins.squares.Add(tmpObj);
-            tmpObj.transform.position = gameObject.transform.position;
 
             //hancurkan objek
             if(jenisMusuh == "Boss"){
                 canvas.GetComponent<canvasGame>().winGame();
                 Debug.Log("BOS SUDAH MATI");
             }
+            else if(jenisMusuh == "Kamikaze"){
+                Destroy(gameObject);
+                //buat coin
+                GameObject tmpObj = Instantiate(coin);
+                tmpObj.name = "2";
+                SpawnCoins.squares.Add(tmpObj);
+                tmpObj.transform.position = gameObject.transform.position;
+            }
             else{
                 Destroy(gameObject);
+                //buat coin
+                GameObject tmpObj = Instantiate(coin);
+                tmpObj.name = "2";
+                SpawnCoins.squares.Add(tmpObj);
+                tmpObj.transform.position = gameObject.transform.position;
             }
         }
         else{
