@@ -112,15 +112,15 @@ public class GameHandler : MonoBehaviour
 
         if(stage == 1){
             minJumlahKamikaze = 2;
-            maxJumlahKamikaze = 5;
+            maxJumlahKamikaze = 3;
 
             jarakWaktuNextWave = 10;
         }
         else if(stage >= 2 && stage <= 3){
             minJumlahKamikaze = 4;
-            maxJumlahKamikaze = 10;
+            maxJumlahKamikaze = 6;
 
-            jarakWaktuNextWave = 7;
+            jarakWaktuNextWave = 5;
         }
         else{
             jarakWaktuNextWave = 5;
@@ -178,11 +178,14 @@ public class GameHandler : MonoBehaviour
     }
 
     void spawnKamikazes(int jumlahKamikazeSpawned){
-        for (int i = 0; i < jumlahKamikazeSpawned; i++)
-        {
-            spawnEnemyByType("kamikaze1");
-            spawnEnemyByType("kamikaze2");
-        }
+        //JANGAN DI FOR
+        // for (int i = 0; i < jumlahKamikazeSpawned; i++)
+        // {
+        //     spawnEnemyByType("kamikaze1");
+        //     spawnEnemyByType("kamikaze2");
+        // }
+        spawnEnemyByType("kamikaze1");
+        spawnEnemyByType("kamikaze2");
     }
 
     void spawnEnemyByType(string jenisMusuh){
