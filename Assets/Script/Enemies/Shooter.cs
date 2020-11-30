@@ -16,7 +16,8 @@ public class Shooter : MonoBehaviour
     void Start()
     {
         // delayTembak = 30f;
-        delayTembak = 90f;
+        // delayTembak = 90f;
+        delayTembak = 250f;
 
         //untuk flip
         flip = transform.localScale;
@@ -48,7 +49,7 @@ public class Shooter : MonoBehaviour
             //nembak peluru ke kiri
             buatPeluru(-3);
 
-            delayTembak = 90f;
+            delayTembak = 250f;
         }
     }
 
