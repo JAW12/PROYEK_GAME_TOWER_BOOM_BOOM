@@ -122,7 +122,7 @@ public class EnemyBehaviour : MonoBehaviour
                 Destroy(gameObject);
                 //buat coin
                 GameObject tmpObj = Instantiate(coin);
-                tmpObj.name = "2";
+                tmpObj.name = "5";
                 SpawnCoins.squares.Add(tmpObj);
                 tmpObj.transform.position = gameObject.transform.position;
             }
