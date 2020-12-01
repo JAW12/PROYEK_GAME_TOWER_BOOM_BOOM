@@ -84,25 +84,17 @@ public class EnemyBehaviour : MonoBehaviour
         //atur healthbar setiap terjadi perubahan hp
         HealthBarBehaviour.SetHealth(hp, maxhp);
 
-        //tambahkan skor
-        int skor = int.Parse(canvasGame.GetComponent<canvasGame>().
-            textScore.text.ToString());
-
-        if (jenisMusuh == "Kamikaze")
-        {
-            skor += 20;
-        }
-        else if(jenisMusuh == "Shooter"){
-            skor += 30;
-        }
-
-        canvasGame.GetComponent<canvasGame>().textScore.SetText(skor.ToString());
-
         //cek mati
         if (hp <= 0)
         {
             hp = 0;
+            
             isDead = true;
+
+            //tambahkan skor
+            int skor = int.Parse(canvas.GetComponent<canvasGame>().textScore.text.ToString());
+
+            canvas.GetComponent<canvasGame>().textScore.SetText(skor.ToString());
 
             //hancurkan objek
             if(jenisMusuh == "Boss"){
@@ -110,6 +102,7 @@ public class EnemyBehaviour : MonoBehaviour
                 Debug.Log("BOS SUDAH MATI");
             }
             else if(jenisMusuh == "Kamikaze"){
+                skor += 20;
                 Destroy(gameObject);
                 //buat coin
                 GameObject tmpObj = Instantiate(coin);
@@ -123,6 +116,7 @@ public class EnemyBehaviour : MonoBehaviour
                 tmpObj.transform.position = gameObject.transform.position;
             }
             else{
+                skor += 30;
                 Destroy(gameObject);
                 //buat coin
                 GameObject tmpObj = Instantiate(coin);
@@ -136,6 +130,7 @@ public class EnemyBehaviour : MonoBehaviour
                 SpawnCoins.squares.Add(tmpObj);
                 tmpObj.transform.position = gameObject.transform.position;
             }
+            canvasGame.GetComponent<canvasGame>().textScore.text = skor.ToString();
         }
         else{
             Debug.Log("HP " + jenisMusuh + " BERKURANG MENJADI " + hp);

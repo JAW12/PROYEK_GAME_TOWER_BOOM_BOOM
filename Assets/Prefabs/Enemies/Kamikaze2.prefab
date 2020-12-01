@@ -539,5 +539,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthBarBehaviour: {fileID: 3094497558277795727}
+  tower: {fileID: 0}
+  laserBoss: {fileID: 0}
+  bossLaser: {fileID: 0}
   coin: {fileID: 0}
+  isDead: 0
   jenisMusuh: Kamikaze

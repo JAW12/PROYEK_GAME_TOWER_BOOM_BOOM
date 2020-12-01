@@ -15,13 +15,14 @@ public class canvasMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         Time.timeScale = 1;
         Cursor.visible = true;
-        Cursor.SetCursor(cursor, Vector2.zero, CursorMode.ForceSoftware);
         if(staticResources.Instance() != null){
             btnSound.GetComponent<Image>().sprite = gameObject.GetComponent<SoundEffect>().getSprite();
         }
-        GetComponent<SoundEffect>().playSound(0, false, 0.2f);
+        Cursor.SetCursor(cursor, Vector2.zero, CursorMode.ForceSoftware);
+        GetComponent<SoundEffect>().playSound(0, true, 0.2f);
         Debug.Log("played");
     }
 

@@ -172,8 +172,7 @@ public class diserang : MonoBehaviour
         // set color
         byte color = canvas.GetComponent<canvasGame>().changeColor();
         objExplosion.transform.GetComponent<SpriteRenderer>().color = new Color32(color, color, color, 255);
-
-
+        
         musuh.GetComponent<EnemyBehaviour>().takeHit(20);
     }
 }

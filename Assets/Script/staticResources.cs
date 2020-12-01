@@ -10,12 +10,8 @@ public class staticResources : MonoBehaviour
 
     private static staticResources _instance;
 
-    void Start() {
+    void Awake() {
         _instance = this;
-    }
-
-    public static staticResources newInstance(){
-        return new staticResources();
     }
 
     public static staticResources Instance() {
