@@ -119,10 +119,8 @@ public class diserang : MonoBehaviour
                 //     musuhNabrak = true;
                 //     kamikazeMeledak(other);
                 // }
-            }
-            
+            }       
         }
-        
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -170,6 +168,11 @@ public class diserang : MonoBehaviour
 
         //atur parent explosion
         objExplosion.transform.parent = grupExplosion.transform;
+        
+        // set color
+        byte color = canvas.GetComponent<canvasGame>().changeColor();
+        objExplosion.transform.GetComponent<SpriteRenderer>().color = new Color32(color, color, color, 255);
+
 
         musuh.GetComponent<EnemyBehaviour>().takeHit(20);
     }

@@ -12,6 +12,7 @@ TagManager:
   - Bomb
   - Tower
   - Peluru
+  - Coin
   layers:
   - Default
   - TransparentFX

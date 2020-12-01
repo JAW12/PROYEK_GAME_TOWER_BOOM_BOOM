@@ -10,10 +10,14 @@ public class canvasMenu : MonoBehaviour
     public GameObject panelMenu;
     public GameObject panelExit;
     public Button btnSound;
+    public Texture2D cursor;
     
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
+        Cursor.visible = true;
+        Cursor.SetCursor(cursor, Vector2.zero, CursorMode.ForceSoftware);
         if(staticResources.Instance() != null){
             btnSound.GetComponent<Image>().sprite = gameObject.GetComponent<SoundEffect>().getSprite();
         }
@@ -27,7 +31,9 @@ public class canvasMenu : MonoBehaviour
 
     public void startGame(){
         // SceneManager.LoadScene("Tutorial");
-        SceneManager.LoadSceneAsync("Loading");
+        // SceneManager.LoadSceneAsync("Loading");
+        canvasLoading.sceneLoad = 0;
+        SceneManager.LoadScene("Loading");
         Time.timeScale = 1;
     }
 

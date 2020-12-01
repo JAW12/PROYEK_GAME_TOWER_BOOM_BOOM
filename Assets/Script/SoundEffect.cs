@@ -40,20 +40,21 @@ public class SoundEffect : MonoBehaviour
 
     public void playSound(int i, bool loop, float volume)
     {   
-        if(soundOn){
-            //i = index audio source dari array audio clip
-            audio.Stop();
-            audio.volume = volume;
-            if (loop == true)
-            {
-                audio.clip = soundEff[i];
-                audio.loop = true;
-                audio.Play();
-            }
-            else
-            { 
-                audio.PlayOneShot(soundEff[i]); 
-            }
+        //i = index audio source dari array audio clip
+        audio.Stop();
+        audio.volume = volume;
+        if (loop == true)
+        {
+            audio.clip = soundEff[i];
+            audio.loop = true;
+            audio.Play();
+        }
+        else
+        { 
+            audio.PlayOneShot(soundEff[i]); 
+        }
+        if(!soundOn){
+            audio.Pause();
         }
     }
 }

@@ -175,11 +175,18 @@ public class GameHandler : MonoBehaviour
             //atur text stage
             canvasGame.GetComponent<canvasGame>().stage = stage;
             canvasGame.GetComponent<canvasGame>().setPanelTextStatusGame();
+            
+            // atur warna bg
+            if(modeTutorial == false){
+                canvasGame.GetComponent<canvasGame>().changeColor();
+            }
         }
         else{
             stageWave = maxStageWave;
         }
     }
+
+    
 
     void spawnKamikazes(int jumlahKamikazeSpawned){
         //JANGAN DI FOR
@@ -259,6 +266,10 @@ public class GameHandler : MonoBehaviour
                 objprefabs.transform.parent = grupKamikaze1.transform;
 
                 //empty.transform.parent = grupKamikaze2.transform;
+
+                // set color
+                byte color = canvasGame.GetComponent<canvasGame>().changeColor();
+                objprefabs.transform.GetComponent<SpriteRenderer>().color = new Color32(color, color, color, 255);
             }
             else if (jenisMusuh == "kamikaze2")
             {
@@ -280,6 +291,10 @@ public class GameHandler : MonoBehaviour
                 objprefabs.transform.parent = grupKamikaze2.transform;
 
                 //empty.transform.parent = grupKamikaze2.transform;
+
+                // set color
+                byte color = canvasGame.GetComponent<canvasGame>().changeColor();
+                objprefabs.transform.GetComponent<SpriteRenderer>().color = new Color32(color, color, color, 255);
             }
             else if(jenisMusuh == "shooter"){
                 prefabsMusuh = prefabsShooter;
@@ -296,6 +311,10 @@ public class GameHandler : MonoBehaviour
                 objprefabs.transform.parent = grupShooter.transform;
                 
                 //empty.transform.parent = grupShooter.transform;
+
+                // set color
+                byte color = canvasGame.GetComponent<canvasGame>().changeColor();
+                objprefabs.transform.GetComponent<SpriteRenderer>().color = new Color32(color, color, color, 255);
             }
 
             //buat empty gameobject sbg parent dari prefabs musuh yg diinstantiate

@@ -64,16 +64,29 @@ public class canvasGame : MonoBehaviour
 
     bool beliWall=false,upWall=false,beliBomb=false,upBomb=false;
 
+    public GameObject BG;
+    public GameObject Tower;
+
+    public Texture2D cursor;
+    public Texture2D cursorWoodenWall;
+    public Texture2D cursorStoneWall;
+    public Texture2D cursorLargeStoneWall;
+
 
     // Start is called before the first frame update
     public void pause(){
         if(isPaused){
             panelPause.GetComponent<Animator>().SetBool("open", false);
             isPaused = false;
+            Time.timeScale = 1;
         }
         else{
+            if(staticResources.Instance() != null){
+                btnSound.GetComponent<Image>().sprite = gameObject.GetComponent<SoundEffect>().getSprite();
+            }
             panelPause.GetComponent<Animator>().SetBool("open", true);
             isPaused = true;
+            Time.timeScale = 0;
         }
     }
 
@@ -101,6 +114,7 @@ public class canvasGame : MonoBehaviour
                     coin -= 5;
                     shop = wallLvl;
                     panelCancel.SetActive(true);
+                    Cursor.SetCursor(cursorWoodenWall, Vector2.zero, CursorMode.ForceSoftware);
                 }
             }
             else if(wallLvl == 1){
@@ -108,6 +122,7 @@ public class canvasGame : MonoBehaviour
                     coin -= 7;
                     shop = wallLvl;
                     panelCancel.SetActive(true);
+                    Cursor.SetCursor(cursorStoneWall, Vector2.zero, CursorMode.ForceSoftware);
                 }
             }
             else if(wallLvl == 2){
@@ -115,6 +130,7 @@ public class canvasGame : MonoBehaviour
                     coin -= 10;
                     shop = wallLvl;
                     panelCancel.SetActive(true);
+                    Cursor.SetCursor(cursorLargeStoneWall, Vector2.zero, CursorMode.ForceSoftware);
                 }
             }
             textCoin.text = coin.ToString();
@@ -182,6 +198,7 @@ public class canvasGame : MonoBehaviour
         textCoin.text = coin.ToString();
         shop = -1;
         panelCancel.SetActive(false);
+        Cursor.SetCursor(cursor, Vector2.zero, CursorMode.ForceSoftware);
     }
 
     void initValueAwal(){
@@ -246,6 +263,10 @@ public class canvasGame : MonoBehaviour
         //atur parent group
         empty.transform.parent = grupBomb.transform;
         objprefabs.transform.parent = empty.transform;
+        
+        // set color
+        byte color = changeColor();
+        objprefabs.transform.GetComponent<SpriteRenderer>().color = new Color32(color, color, color, 255);
 
         //atur name waktu dimasukkan ke world
         int ctr = grupBomb.transform.childCount + 1;
@@ -300,6 +321,8 @@ public class canvasGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = true;
+        Cursor.SetCursor(cursor, Vector2.zero, CursorMode.ForceSoftware);
         initValueAwal();
         gameHandler.GetComponent<GameHandler>().setKondisiAwalGame();
         panelCancel.SetActive(false);
@@ -307,6 +330,68 @@ public class canvasGame : MonoBehaviour
             btnSound.GetComponent<Image>().sprite = gameObject.GetComponent<SoundEffect>().getSprite();
         }
         GetComponent<SoundEffect>().playSound(0, true, 1f);
+        panelCancel.SetActive(false);
+    }
+
+    public byte changeColor(){
+        // Debug.Log("Stage : " + stage.ToString());
+        byte color = 255;
+        if(stage == 2){
+            color = 240;
+        }
+        else if(stage == 3){
+            color = 225;
+        }
+        else if(stage == 4){
+            color = 210;
+        }
+        else if(stage == 5){
+            color = 195;
+        }
+
+        // Debug.Log(color);
+        foreach(Transform child in BG.transform){
+            child.GetComponent<SpriteRenderer>().color = new Color32(color, color, color, 255);
+        }
+        foreach(Transform child in Tower.transform){
+            child.GetComponent<SpriteRenderer>().color = new Color32(color, color, color, 255);
+        }
+        GameObject[] listKamikaze1 = GameObject.FindGameObjectsWithTag("Kamikaze1");
+        foreach(GameObject child in listKamikaze1){
+            child.GetComponent<SpriteRenderer>().color = new Color32(color, color, color, 255);
+        }
+
+        GameObject[] listKamikaze2 = GameObject.FindGameObjectsWithTag("Kamikaze2");
+        foreach(GameObject child in listKamikaze2){
+            child.GetComponent<SpriteRenderer>().color = new Color32(color, color, color, 255);
+        }
+
+        GameObject[] listPeluru = GameObject.FindGameObjectsWithTag("Peluru");
+        foreach(GameObject child in listPeluru){
+            child.GetComponent<SpriteRenderer>().color = new Color32(color, color, color, 255);
+        }
+
+        GameObject[] listShooter = GameObject.FindGameObjectsWithTag("Shooter");
+        foreach(GameObject child in listShooter){
+            child.GetComponent<SpriteRenderer>().color = new Color32(color, color, color, 255);
+        }
+
+        GameObject[] listWall = GameObject.FindGameObjectsWithTag("Walls");
+        foreach(GameObject child in listWall){
+            child.GetComponent<SpriteRenderer>().color = new Color32(color, color, color, 255);
+        }
+
+        GameObject[] listExplosion = GameObject.FindGameObjectsWithTag("Explosion");
+        foreach(GameObject child in listExplosion){
+            child.GetComponent<SpriteRenderer>().color = new Color32(color, color, color, 255);
+        }
+
+        GameObject[] listCoin = GameObject.FindGameObjectsWithTag("Coin");
+        foreach(GameObject child in listCoin){
+            child.GetComponent<SpriteRenderer>().color = new Color32(color, color, color, 255);
+        }
+
+        return color;
     }
 
     // Update is called once per frame

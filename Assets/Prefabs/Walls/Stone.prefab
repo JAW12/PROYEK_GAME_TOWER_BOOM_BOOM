@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 5110353197137701793}
   - component: {fileID: 5110353197137701792}
   - component: {fileID: 5220130250924337607}
-  - component: {fileID: 221410122417629087}
   - component: {fileID: 4345616787291778066}
   - component: {fileID: 1322498000357943557}
+  - component: {fileID: 6423195698016435520}
   m_Layer: 0
   m_Name: Stone
   m_TagString: Walls
@@ -98,7 +98,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -107,32 +107,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &221410122417629087
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5110353197137701795}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.09691095, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 5.12}
-    newSize: {x: 4.750905, y: 5.4100003}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 6.7118297, y: 5.1718082}
-  m_EdgeRadius: 0
 --- !u!114 &4345616787291778066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,6 +130,7 @@ MonoBehaviour:
   wall_3: {fileID: -2419113548653386123, guid: 175b520013513124f83b5f6e7ba37816, type: 3}
   wall_4: {fileID: -7840838701745746089, guid: 175b520013513124f83b5f6e7ba37816, type: 3}
   wall: []
+  coin: {fileID: 0}
   hit: 0
 --- !u!95 &1322498000357943557
 Animator:
@@ -176,3 +151,77 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!60 &6423195698016435520
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5110353197137701795}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.12, y: 5.12}
+    newSize: {x: 4.750905, y: 5.4100003}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.8399999, y: -2.33}
+      - {x: 1.88, y: -2.3}
+      - {x: 1.88, y: -2.1299999}
+      - {x: 1.8499999, y: -1.62}
+      - {x: 1.77, y: -0.24}
+      - {x: 1.67, y: 1.4699999}
+      - {x: 1.68, y: 1.5799999}
+      - {x: 1.74, y: 1.5799999}
+      - {x: 1.76, y: 1.5999999}
+      - {x: 1.76, y: 2.08}
+      - {x: 1.7099999, y: 2.12}
+      - {x: 1.2099999, y: 2.18}
+      - {x: 0.75, y: 2.23}
+      - {x: 0.25, y: 2.28}
+      - {x: -0.13, y: 2.3}
+      - {x: -0.71999997, y: 2.3}
+      - {x: -1.04, y: 2.29}
+      - {x: -1.23, y: 2.28}
+      - {x: -1.4499999, y: 2.26}
+      - {x: -1.5999999, y: 2.24}
+      - {x: -1.68, y: 2.23}
+      - {x: -1.8, y: 2.21}
+      - {x: -1.8499999, y: 2.19}
+      - {x: -1.9, y: 1.8199999}
+      - {x: -1.91, y: 1.6899999}
+      - {x: -1.9, y: 1.66}
+      - {x: -1.78, y: 1.67}
+      - {x: -1.8, y: 1.22}
+      - {x: -1.8299999, y: 0.71999997}
+      - {x: -1.8499999, y: 0.39}
+      - {x: -1.87, y: 0.04}
+      - {x: -1.89, y: -0.35}
+      - {x: -1.9, y: -0.55}
+      - {x: -1.92, y: -1}
+      - {x: -1.93, y: -1.31}
+      - {x: -1.9399999, y: -1.55}
+      - {x: -1.9399999, y: -2.2}
+      - {x: -1.88, y: -2.27}
+      - {x: -1.76, y: -2.31}
+      - {x: -1.5799999, y: -2.33}
+      - {x: -1.14, y: -2.3799999}
+      - {x: -0.74, y: -2.4099998}
+      - {x: -0.57, y: -2.4199998}
+      - {x: -0.37, y: -2.4299998}
+      - {x: -0.049999997, y: -2.44}
+      - {x: 0.74, y: -2.44}
+      - {x: 1.01, y: -2.4299998}
+      - {x: 1.27, y: -2.4099998}
+      - {x: 1.54, y: -2.3799999}

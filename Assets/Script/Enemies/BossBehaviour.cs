@@ -15,6 +15,7 @@ public class BossBehaviour : MonoBehaviour
     public BossHealthBarBehaviour HealthBarBehaviour;
 
     public GameObject wallParent;
+    public GameObject canvasGame;
 
     Vector3 mousePos;
     void Start()
@@ -25,6 +26,7 @@ public class BossBehaviour : MonoBehaviour
         HealthBarBehaviour.SetHealth(hp, maxhp);
         currentTime = startingTime;
         takeHit(30);
+        canvasGame = GameObject.Find("Canvas");
     }
 
     public void takeHit(float damage){
@@ -51,26 +53,28 @@ public class BossBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(cekStartTimer != 1){
-            currentTime -= 1 * Time.deltaTime;
-            //Debug.Log(currentTime);
-            takeHit(1);
-        }
-        if(currentTime < 1){
-            currentTime = startingTime;
-            cekStartTimer = 1;
-            Debug.Log("Waktu habis");
-            
-            for (int i = 0; i < wallParent.transform.childCount; i++)
-            {
-                Destroy(wallParent.transform.GetChild(i).gameObject);
+        if(canvasGame.GetComponent<canvasGame>().isPaused == false){
+            if(cekStartTimer != 1){
+                currentTime -= 1 * Time.deltaTime;
+                //Debug.Log(currentTime);
+                takeHit(1);
             }
-        }
-        // BoxCollider2D col = this.GetComponent<BoxCollider2D>();
+            if(currentTime < 1){
+                currentTime = startingTime;
+                cekStartTimer = 1;
+                Debug.Log("Waktu habis");
+                
+                for (int i = 0; i < wallParent.transform.childCount; i++)
+                {
+                    Destroy(wallParent.transform.GetChild(i).gameObject);
+                }
+            }
+            // BoxCollider2D col = this.GetComponent<BoxCollider2D>();
 
-        // if(col.OverlapPoint(Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10))))
-        // {
-        //     cekStartTimer = 1;
-        // }
+            // if(col.OverlapPoint(Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10))))
+            // {
+            //     cekStartTimer = 1;
+            // }
+        }
     }
 }

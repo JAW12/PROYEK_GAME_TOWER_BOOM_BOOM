@@ -24,7 +24,6 @@ public class spawnWalls : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-
             int shop = canvas.GetComponent<canvasGame>().shop;
             Debug.Log(shop);
             mousePos = Input.mousePosition;
@@ -50,10 +49,30 @@ public class spawnWalls : MonoBehaviour
                         GameObject[] walls = GameObject.FindGameObjectsWithTag("Walls");
                         foreach(GameObject w in walls){
                             if(w != null){
-                                BoxCollider2D col = w.GetComponent<BoxCollider2D>();
-                                if(col.OverlapPoint(Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10)))){
-                                    can = false;
+                                PolygonCollider2D col = w.GetComponent<PolygonCollider2D>();
+                                if(shop == 2){
+                                    for(float i = -50; i < 50; i+=0.1f){
+                                        for(float j = -50; j < 50; j+= 0.1f){
+                                            if(col.OverlapPoint(Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x + i, mousePos.y + j, 10)))){
+                                                can = false;
+                                            }
+                                        }
+                                    } 
                                 }
+                                else{
+                                    for(float i = -15; i < 15; i+=0.1f){
+                                        for(float j = -15; j < 15; j+= 0.1f){
+                                            if(col.OverlapPoint(Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x + i, mousePos.y + j, 10)))){
+                                                can = false;
+                                            }
+                                        }
+                                    } 
+                                }
+                            }
+                        }
+                        if(shop == 2){
+                            if(mousePos.x < -5){
+                                can = false;
                             }
                         }
                         if(can == true){
@@ -63,11 +82,14 @@ public class spawnWalls : MonoBehaviour
                             GameObject tmpObj = Instantiate(wall);
                             tmpObj.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10));
                             tmpObj.transform.parent = empty.transform;
-
+                            byte color = canvas.GetComponent<canvasGame>().changeColor();
+                            tmpObj.transform.GetComponent<SpriteRenderer>().color = new Color32(color, color, color, 255);
+                            
                             empty.name = "walls_luar";
                             tmpObj.name = "wall_dalam";
                             canvas.GetComponent<canvasGame>().shop = -1;
                             canvas.GetComponent<canvasGame>().panelCancel.SetActive(false);
+                            Cursor.SetCursor(canvas.GetComponent<canvasGame>().cursor, Vector2.zero, CursorMode.ForceSoftware);
                         }
                         else{
                             Debug.Log("nabrak");

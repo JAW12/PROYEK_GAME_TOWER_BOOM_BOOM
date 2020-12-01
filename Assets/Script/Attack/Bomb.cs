@@ -139,6 +139,10 @@ public class Bomb : MonoBehaviour
         //atur parent explosion
         objExplosion.transform.parent = grupExplosion.transform;
 
+        // set color
+        byte color = canvasGame.GetComponent<canvasGame>().changeColor();
+        objExplosion.transform.GetComponent<SpriteRenderer>().color = new Color32(color, color, color, 255);
+        
         //damage explosion
         explosionDamage();
 

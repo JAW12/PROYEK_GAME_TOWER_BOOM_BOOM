@@ -103,7 +103,6 @@ public class EnemyBehaviour : MonoBehaviour
         {
             hp = 0;
             isDead = true;
-           
 
             //hancurkan objek
             if(jenisMusuh == "Boss"){
@@ -115,6 +114,11 @@ public class EnemyBehaviour : MonoBehaviour
                 //buat coin
                 GameObject tmpObj = Instantiate(coin);
                 tmpObj.name = "2";
+                tmpObj.tag = "Coin";
+                 // set color
+                byte color = canvasGame.GetComponent<canvasGame>().changeColor();
+                tmpObj.transform.GetComponent<SpriteRenderer>().color = new Color32(color, color, color, 255);
+
                 SpawnCoins.squares.Add(tmpObj);
                 tmpObj.transform.position = gameObject.transform.position;
             }
@@ -123,6 +127,12 @@ public class EnemyBehaviour : MonoBehaviour
                 //buat coin
                 GameObject tmpObj = Instantiate(coin);
                 tmpObj.name = "5";
+                tmpObj.tag = "Coin";
+
+                 // set color
+                byte color = canvasGame.GetComponent<canvasGame>().changeColor();
+                tmpObj.transform.GetComponent<SpriteRenderer>().color = new Color32(color, color, color, 255);
+
                 SpawnCoins.squares.Add(tmpObj);
                 tmpObj.transform.position = gameObject.transform.position;
             }

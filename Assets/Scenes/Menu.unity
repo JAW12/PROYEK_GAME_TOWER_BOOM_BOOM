@@ -596,6 +596,7 @@ MonoBehaviour:
   panelMenu: {fileID: 1014752878}
   panelExit: {fileID: 869517575}
   btnSound: {fileID: 1101697821}
+  cursor: {fileID: 2800000, guid: 2e71a8202d3b4a3448ec85ced5a40265, type: 3}
 --- !u!114 &456906308
 MonoBehaviour:
   m_ObjectHideFlags: 0

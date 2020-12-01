@@ -1342,6 +1342,13 @@ MonoBehaviour:
   textGameOver_Menang: {fileID: 46517338}
   modeTutorial: 1
   textTutorial: {fileID: 1811138799}
+  BG: {fileID: 1269460914}
+  Tower: {fileID: 1774686021}
+  cursor: {fileID: 2800000, guid: 2e71a8202d3b4a3448ec85ced5a40265, type: 3}
+  cursorWoodenWall: {fileID: 2800000, guid: 89f40d0702ab04b4eaa85fc24b20959b, type: 3}
+  cursorStoneWall: {fileID: 2800000, guid: 4766716444a965b449ef86e524455e71, type: 3}
+  cursorLargeStoneWall: {fileID: 2800000, guid: 4c1d62d9215a73a4b933db561be30e7b,
+    type: 3}
 --- !u!114 &198161426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9505,13 +9512,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.8768921, y: 0.34701538}
-      - {x: 0.008544922, y: 1.3591919}
-      - {x: -0.8220825, y: 0.34591675}
-      - {x: -1.2845459, y: -0.54623413}
-      - {x: -1.2034302, y: -1.681366}
-      - {x: 1.1777344, y: -1.6984558}
-      - {x: 1.3272705, y: -0.47781372}
+    - - {x: -0.011291504, y: 1.36203}
+      - {x: -0.95105654, y: 0.30901697}
+      - {x: -1.3598633, y: -0.4767151}
+      - {x: -1.2098999, y: -1.7141113}
+      - {x: 1.1872559, y: -1.6688538}
+      - {x: 1.3656616, y: -0.48266602}
+      - {x: 0.9510565, y: 0.30901712}
 --- !u!114 &1774686023
 MonoBehaviour:
   m_ObjectHideFlags: 0
