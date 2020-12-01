@@ -7,6 +7,7 @@ public class Kamikaze1 : MonoBehaviour
     // Start is called before the first frame update
     Vector2 posisiKamikaze;
     Transform parent;
+    Rigidbody2D kamikazeRigidBody;
     float x;
 
     //kecepatan gerak
@@ -32,13 +33,14 @@ public class Kamikaze1 : MonoBehaviour
         grupExplosion = GameObject.Find("GrupEnemies/GrupExplosion");
         canvas = GameObject.Find("Canvas");
         coin = GameObject.Find("1024x128_0");
+        kamikazeRigidBody = this.GetComponent<Rigidbody2D>();
 
         //waktu gerak nanti yg berubah adalah posisi gameobject parent nya
         //parent = gameObject.transform.parent;
         //posisiKamikaze = parent.gameObject.transform.position;
 
         //jadinya ga pake empty gameobject sbg parent
-        posisiKamikaze = gameObject.transform.position;
+        posisiKamikaze = this.transform.position;
         x = posisiKamikaze.x;
 
         setKondisiAwalKamikaze();
@@ -53,28 +55,42 @@ public class Kamikaze1 : MonoBehaviour
         //atur jarak bergerak
         //kamikaze kecil -> gerak lebih cepat
         // jarakBergerak = 0.009f;
-        // jarakBergerak = 0.03f;
-        jarakBergerak = 0.012f;
+        // jarakBergerak = 0.04f;
+        // jarakBergerak = 0.012f;
+        jarakBergerak = 0.007f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(canvas.GetComponent<canvasGame>().isPaused == false){
-            if (kenaTower == false && kenaWall == false)
-            {
-                x -= jarakBergerak;
-                posisiKamikaze.x = x;
-            }
-        }
+        // if(canvas.GetComponent<canvasGame>().isPaused == false){
+        //     if (kenaTower == false && kenaWall == false)
+        //     {
+        //         // x -= jarakBergerak;
+        //         // posisiKamikaze.x = x;
+        //     }
+        // }
     }
 
     private void FixedUpdate()
     {
+        // if(canvas.GetComponent<canvasGame>().isPaused == false){
+        //     //atur posisi
+        //     //parent.transform.position = posisiKamikaze;
+        //     transform.position = posisiKamikaze;
+        // }
+
         if(canvas.GetComponent<canvasGame>().isPaused == false){
-            //atur posisi
-            //parent.transform.position = posisiKamikaze;
-            transform.position = posisiKamikaze;
+            if (kenaTower == false && kenaWall == false)
+            {
+                // x -= jarakBergerak;
+                // posisiKamikaze.x = x;
+
+                //gerak kamikaze
+                float xforce = -1 * jarakBergerak * Time.deltaTime;
+                Vector2 force = new Vector2(xforce, 0);
+                kamikazeRigidBody.AddForce(force);
+            }
         }
     }
 

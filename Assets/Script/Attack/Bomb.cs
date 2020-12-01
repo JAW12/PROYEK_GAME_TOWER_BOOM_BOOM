@@ -123,6 +123,9 @@ public class Bomb : MonoBehaviour
 
         //atur supaya bisa beli bom lagi
         canvasGame.GetComponent<canvasGame>().sedangMengaturBom = false;
+
+        //ubah cursor kembali
+        Cursor.SetCursor(canvasGame.GetComponent<canvasGame>().cursor, Vector2.zero, CursorMode.ForceSoftware);
     }
 
     private void bombExplode(){

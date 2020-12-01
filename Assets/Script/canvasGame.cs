@@ -71,6 +71,7 @@ public class canvasGame : MonoBehaviour
     public Texture2D cursorWoodenWall;
     public Texture2D cursorStoneWall;
     public Texture2D cursorLargeStoneWall;
+    public Texture2D cursorBomb;
 
 
     // Start is called before the first frame update
@@ -228,6 +229,8 @@ public class canvasGame : MonoBehaviour
         //cek supaya ga beli multiple bom dlm 1x transaksi
         if (! sedangMengaturBom)
         {
+            bool validChangeCursor = false;
+
             if (coin >= bombPrice)
             {
                 //kurangi coin kalo coin cukup
@@ -235,6 +238,8 @@ public class canvasGame : MonoBehaviour
                 textCoin.text = coin.ToString();
 
                 sedangMengaturBom = true;
+                validChangeCursor = true;
+
                 makeBomb();      
 
                 //aktifkan panel berisi button cancel
@@ -245,8 +250,17 @@ public class canvasGame : MonoBehaviour
                 if(beliBomb == false){
                     textTutorial.text = "Click on the last button to upgrage the bomb";
                     beliBomb = true;
+
+                    validChangeCursor = true;
                 }
             }
+
+            //ubah cursor
+            if (validChangeCursor)
+            {
+                Cursor.SetCursor(GetComponent<canvasGame>().cursorBomb, Vector2.zero, CursorMode.ForceSoftware);
+            }
+            
         } 
     }
 

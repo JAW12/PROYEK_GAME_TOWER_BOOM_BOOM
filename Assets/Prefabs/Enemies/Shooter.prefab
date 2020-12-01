@@ -286,6 +286,7 @@ GameObject:
   - component: {fileID: 4079261785509638840}
   - component: {fileID: 349568530652684632}
   - component: {fileID: 9071756122964618272}
+  - component: {fileID: 8509337283475575945}
   m_Layer: 0
   m_Name: Shooter
   m_TagString: Shooter
@@ -407,6 +408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs_peluru: {fileID: 1883634921723840112, guid: 08f473c9c004eef46bbe825f3a8f26c8,
     type: 3}
+  canvasGame: {fileID: 0}
   target: {fileID: 5101537210895105320, guid: a3d4ad0ba870c8a47ae270f41f211c7a, type: 3}
 --- !u!114 &9071756122964618272
 MonoBehaviour:
@@ -421,8 +423,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthBarBehaviour: {fileID: 4631922861355928188}
+  tower: {fileID: 0}
+  laserBoss: {fileID: 0}
+  bossLaser: {fileID: 0}
   coin: {fileID: 0}
+  isDead: 0
   jenisMusuh: Shooter
+--- !u!50 &8509337283475575945
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6047796971916935366}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &6881931615045720894
 GameObject:
   m_ObjectHideFlags: 0

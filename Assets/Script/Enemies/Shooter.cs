@@ -18,7 +18,7 @@ public class Shooter : MonoBehaviour
     {
         // delayTembak = 30f;
         // delayTembak = 90f;
-        delayTembak = 250f;
+        delayTembak = 225f;
 
         //untuk flip
         flip = transform.localScale;
@@ -34,27 +34,27 @@ public class Shooter : MonoBehaviour
     void Update()
     {
         if(canvasGame.GetComponent<canvasGame>().isPaused == false){
-            // setiap 30 detik dia nembak lagi, nembak lagi
-                    delayTembak = delayTembak - 1;
-                    if (delayTembak < 0)
-                    {
-                        //mencari posisi lokal scale dari simerah
-                        // kalo 1 artinya gerak ke kanan. kalo -1 gerak ke kiri
-                        float posisi = target.transform.localScale.x;
+            // setiap delay tembak dia nembak lagi, nembak lagi
+            delayTembak = delayTembak - 1;
+            if (delayTembak < 0)
+            {
+                //mencari posisi lokal scale dari simerah
+                // kalo 1 artinya gerak ke kanan. kalo -1 gerak ke kiri
+                float posisi = target.transform.localScale.x;
 
-                        // cek kalo player di kiri, dia nembak ke kiri
-                        // kalo player di kanan nembak ke kanan
-                        // kalo sudah dapat tinggal kirim ke parameter
-                        // if (posisi == 1)
-                        //     buatPeluru(-2);
-                        // else
-                        //     buatPeluru(2);
+                // cek kalo player di kiri, dia nembak ke kiri
+                // kalo player di kanan nembak ke kanan
+                // kalo sudah dapat tinggal kirim ke parameter
+                // if (posisi == 1)
+                //     buatPeluru(-2);
+                // else
+                //     buatPeluru(2);
 
-                        //nembak peluru ke kiri
-                        buatPeluru(-3);
+                //nembak peluru ke kiri
+                buatPeluru(-3);
 
-                        delayTembak = 250f;
-                    }
+                delayTembak = 225f;
+            }
         }
     }
 
