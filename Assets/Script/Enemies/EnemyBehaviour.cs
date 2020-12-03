@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -98,7 +99,9 @@ public class EnemyBehaviour : MonoBehaviour
 
             //hancurkan objek
             if(jenisMusuh == "Boss"){
-                canvas.GetComponent<canvasGame>().winGame();
+                //canvas.GetComponent<canvasGame>().winGame();
+                SceneManager.LoadScene("WinGame");
+                StoryAssistant.menang = true;
                 Debug.Log("BOS SUDAH MATI");
             }
             else if(jenisMusuh == "Kamikaze"){
@@ -164,7 +167,7 @@ public class EnemyBehaviour : MonoBehaviour
     public void timerBoss(){
         if(cekStartTimer != 1){
             currentTime -= 1 * Time.deltaTime;
-            Debug.Log(currentTime);
+            //Debug.Log(currentTime);
         }
         if(currentTime < 1){
             currentTime = startingTime;

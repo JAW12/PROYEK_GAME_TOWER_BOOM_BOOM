@@ -42,6 +42,7 @@ public class SpawnCoins : MonoBehaviour
 
                 if(col.OverlapPoint(Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10))))
                 {
+                    text.GetComponent<TextMesh>().text = "Coins + " + square.name.ToString(); 
                     GameObject tmpObj = Instantiate(text);
                     tmpObj.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10));
                     tmpObj.GetComponent<Renderer>().sortingLayerID = SortingLayer.NameToID("ForegroundLayer");

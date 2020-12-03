@@ -16,6 +16,14 @@ public class StoryAssistant : MonoBehaviour
     public Sprite story_2;
     public Sprite story_3;
     public Sprite story_4;
+
+    //tutorial
+    public Sprite winStory;
+    public static bool menang = false;
+    
+    public GameObject btnSkip;
+    //end of tutorial
+
     public GameObject panel;
 
     public GameObject btnPrev;
@@ -30,12 +38,13 @@ public class StoryAssistant : MonoBehaviour
         Application.targetFrameRate = 3;
         messageArray = new string[]
         {
-            "Once upon a time, in a happily peaceful kingdom...",
-            "Some strange things invading. A modern colony comes and wants to invade your stronghold.",
-            "Luckily, you have secret weapon that you already prepared. You just need money to use that weapon.",
-            "Protect your kingdom by defending your stronghold..",
-            "Passing through all the waves of enemies incoming...",
-            "and kill the big boss of this modern colony.."
+            "Once upon a time, there was a beautiful kingdom in a faraway land...",
+            "One day strange-looking things appeared out of nowhere. It was a colony that wanted to invade the kingdom.",
+            "Luckily, the kingdom had a secret weapon that can annihilate the colony. But it needed a large amount of money in order to use that weapon.",
+            "The king issued an order to use any means necessary..",
+            "To defend castle from the incoming waves of attack...",
+            "and kill the boss of the colony.",
+            "After a long and tiring battle, the kingdom had successfully repelled the colony and annihilated them. Ever since that day no other colony dared to attack that kingdom"
         };
         spriteArray = new Sprite[]{
             story_1,
@@ -43,18 +52,26 @@ public class StoryAssistant : MonoBehaviour
             story_3,
             story_4,
             story_4,
-            story_4
+            story_4,
+            winStory
         };
     }        
     
     private void Start() {
         Cursor.visible = true;
         Cursor.SetCursor(cursor, Vector2.zero, CursorMode.ForceSoftware);
-        string message = messageArray[currentStory];
-        textWriterSingle = TextWriter.AddWriter_Static(messageText, message, 0.1f, true, true);
-        panel.GetComponent<Image>().sprite = spriteArray[currentStory];
-        btnPrev.SetActive(false);
-
+        if(menang != true){
+            string message = messageArray[currentStory];
+            textWriterSingle = TextWriter.AddWriter_Static(messageText, message, 0.1f, true, true);
+            panel.GetComponent<Image>().sprite = spriteArray[currentStory];
+            btnPrev.SetActive(false);   
+        }
+        else{
+            btnPrev.SetActive(false);
+            btnNext.SetActive(false);
+            btnSkip.SetActive(false);
+            winGame();
+        }
         if(staticResources.Instance() != null){
             btnSound.GetComponent<Image>().sprite = gameObject.GetComponent<SoundEffect>().getSprite();
         }
@@ -91,6 +108,13 @@ public class StoryAssistant : MonoBehaviour
         btnPrev.SetActive(true);
         btnNext.SetActive(true);
         panelTutorial.GetComponent<Animator>().SetBool("open", true);
+    }
+
+    private void winGame(){
+        currentStory = 6;
+        string message = messageArray[currentStory];
+        textWriterSingle = TextWriter.AddWriter_Static(messageText, message, 0.1f, true, true);
+        panel.GetComponent<Image>().sprite = spriteArray[currentStory];
     }
 
     public void startGame(){
