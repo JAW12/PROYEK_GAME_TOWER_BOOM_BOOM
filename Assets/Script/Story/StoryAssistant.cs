@@ -44,7 +44,7 @@ public class StoryAssistant : MonoBehaviour
             "The king issued an order to use any means necessary..",
             "To defend castle from the incoming waves of attack...",
             "and kill the boss of the colony.",
-            "After a long and tiring battle, the kingdom had successfully repelled the colony and annihilated them. Ever since that day no other colony dared to attack that kingdom"
+            "Finally, the kingdom had successfully repelled the colony. Ever since that day no other colony dared to attack that kingdom."
         };
         spriteArray = new Sprite[]{
             story_1,

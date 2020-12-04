@@ -9,7 +9,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     //atk boss
     float currentTime = 0f;
-    float startingTime = 60f;
+    float startingTime = 30f;
 
     public static int cekStartTimer = 1;
 
@@ -23,7 +23,6 @@ public class EnemyBehaviour : MonoBehaviour
 
     public GameObject laserBoss;
 
-    [SerializeField] private Animator bossLaser;
     float towerHP;
 
     //prefabs coin
@@ -45,7 +44,7 @@ public class EnemyBehaviour : MonoBehaviour
         canvasGame = GameObject.Find("Canvas");
 
         if(jenisMusuh == "Boss"){
-            laserBoss = GameObject.Find("GrupEnemies/LaserBoss");
+            //laserBoss = GameObject.Find("GrupEnemies/LaserBoss");
         }
 
         if(tower != null){
@@ -100,7 +99,7 @@ public class EnemyBehaviour : MonoBehaviour
             //hancurkan objek
             if(jenisMusuh == "Boss"){
                 //canvas.GetComponent<canvasGame>().winGame();
-                SceneManager.LoadScene("WinGame");
+                SceneManager.LoadScene("Storyline");
                 StoryAssistant.menang = true;
                 Debug.Log("BOS SUDAH MATI");
             }
@@ -172,20 +171,39 @@ public class EnemyBehaviour : MonoBehaviour
         if(currentTime < 1){
             currentTime = startingTime;
             Debug.Log("Waktu habis");
-            bossLaser.SetBool("cekState",true);
-            laserBoss.SetActive(true);
+            //laserBoss.SetActive(true);
+            if (laserBoss != null){
+                buatPeluru(-3);   
+            }
             float temp = towerHP * 30 / 100;
             tower.GetComponent<diserang>().attacked(temp);
-            GameObject wallParent = GameObject.Find("GrupWalls");
+            // GameObject wallParent = GameObject.Find("GrupWalls");
             
-            for (int i = 0; i < wallParent.transform.childCount; i++)
-            {
-                Destroy(wallParent.transform.GetChild(i).gameObject);
-            }
+            // for (int i = 0; i < wallParent.transform.childCount; i++)
+            // {
+            //     Destroy(wallParent.transform.GetChild(i).gameObject);
+            // }
         }
-        if(currentTime == 58){
-            laserBoss.SetActive(false);
-            bossLaser.SetBool("cekState",false);
-        }
+        // if(currentTime == 58){
+        //     laserBoss.SetActive(false);
+        // }
+    }
+
+    public void buatPeluru(float paramDx)
+    {
+        Debug.Log("x : " + transform.position.x.ToString() + ", y : " + transform.position.y.ToString());
+        Vector2 lokasiMuncul = new Vector2(transform.position.x -1f, transform.position.y -0.4f);
+        //Vector2 lokasiMuncul = new Vector2(-688.01f,-336.57f);
+        GameObject peluru_mc = Instantiate(laserBoss, lokasiMuncul, transform.rotation);
+
+        // setelah dibuat Instantiate baru diatur posisinya
+        // paramdx = jarak antar peluru ? (aku krg tau)
+        Vector2 posisi = new Vector2(2 * paramDx, 0);
+        peluru_mc.GetComponent<PeluruBoss>().init(posisi);
+
+        //atur supaya shooter yg nembak menjadi parent peluru
+        peluru_mc.transform.parent = gameObject.transform;
+
+        Destroy(peluru_mc, 10f);
     }
 }

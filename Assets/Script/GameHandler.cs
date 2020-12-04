@@ -48,7 +48,7 @@ public class GameHandler : MonoBehaviour
         grupboss = GameObject.Find("GrupEnemies/Boss");
         laserBoss = GameObject.Find("GrupEnemies/LaserBoss");
         grupboss.SetActive(false);
-        laserBoss.SetActive(false);
+        //laserBoss.SetActive(false);
         setKondisiAwalGame();
     }
 

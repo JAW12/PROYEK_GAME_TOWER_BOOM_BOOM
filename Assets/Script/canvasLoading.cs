@@ -20,6 +20,7 @@ public class canvasLoading : MonoBehaviour
         Cursor.visible = false;
         yield return new WaitForSeconds(2.7f);
         if(sceneLoad == 0){
+            StoryAssistant.menang = false;
             SceneManager.LoadScene("Storyline");
         }
         else if(sceneLoad == 1){

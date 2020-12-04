@@ -138,7 +138,7 @@ public class canvasGame : MonoBehaviour
             if(modeTutorial == true){
                 GameHandler.cekBeliWall = true;
                 if(beliWall == false){
-                    textTutorial.text = "Click on the second button to upgrade the wall";
+                    textTutorial.text = "Click on the coin to collect it and on the second button to upgrade the wall";
                     beliWall = true;
                 }
             }
