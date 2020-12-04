@@ -440,7 +440,12 @@ public class canvasGame : MonoBehaviour
     }
 
     public void restart(){
-        SceneManager.LoadScene("Game");
+        if(modeTutorial == true){
+            SceneManager.LoadScene("Tutorial");
+        }
+        else{
+            SceneManager.LoadScene("Game");
+        }
         Time.timeScale = 1;
         isPaused = false;
     }
