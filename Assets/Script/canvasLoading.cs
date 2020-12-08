@@ -31,9 +31,11 @@ public class canvasLoading : MonoBehaviour
                 SceneManager.LoadScene("Storyline");
             }
             else if(sceneLoad == 1){
+                Destroy(GameObject.FindGameObjectWithTag("Music"));
                 SceneManager.LoadScene("Tutorial");
             }
             else if(sceneLoad == 2){
+                Destroy(GameObject.FindGameObjectWithTag("Music"));
                 SceneManager.LoadScene("Game");
             }
         }
