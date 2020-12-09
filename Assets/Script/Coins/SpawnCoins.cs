@@ -18,6 +18,11 @@ public class SpawnCoins : MonoBehaviour
 
     public TextMeshProUGUI score_txt;
 
+    //tutorial
+    public bool modeTutorial;
+    public TextMeshProUGUI textTutorial;
+    public GameObject aupgradeWall;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +59,18 @@ public class SpawnCoins : MonoBehaviour
                     squares.Remove(square);
                     DestroyImmediate(square);
                     canplace = false;
+
+                    if(modeTutorial == true){
+                        if(canvasGame.cekCtr == false){
+                            aupgradeWall.SetActive(true);
+                            textTutorial.text = "Upgrade the wall so it can withstand more damage.";
+                            modeTutorial = false;
+                            canvasGame.cekCtr = true;
+                        }
+                        if(square.name.ToString() == "5"){
+                            textTutorial.text = "Click the → button to go to the game";
+                        }
+                    }
                 }
             }
             

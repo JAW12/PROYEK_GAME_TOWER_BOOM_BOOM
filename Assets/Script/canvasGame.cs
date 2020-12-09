@@ -64,6 +64,9 @@ public class canvasGame : MonoBehaviour
 
     bool beliWall=false,upWall=false,beliBomb=false,upBomb=false;
 
+    public static bool cekCtr = false;
+    public GameObject abuyWall,aupgradeWall,aplaceWall,abuyBomb,aupgradeBomb,aplaceBomb;
+
     public GameObject BG;
     public GameObject Tower;
 
@@ -138,9 +141,12 @@ public class canvasGame : MonoBehaviour
             if(modeTutorial == true){
                 GameHandler.cekBeliWall = true;
                 if(beliWall == false){
-                    textTutorial.text = "Click on the coin to collect it and on the second button to upgrade the wall";
+                    aplaceWall.SetActive(true);
+                    abuyWall.SetActive(false);
+                    textTutorial.text = "Click on the tile to place the wall";
                     beliWall = true;
                 }
+                abuyWall.SetActive(false);
             }
         }
     }
@@ -165,9 +171,10 @@ public class canvasGame : MonoBehaviour
             }
             textCoin.text = coin.ToString();
             if(modeTutorial == true){
-                GameHandler.cekBeliWall = true;
                 if(upWall == false){
-                    textTutorial.text = "Click on the third button to buy a bomb";
+                    abuyWall.SetActive(true);
+                    aupgradeWall.SetActive(false);
+                    textTutorial.text = "Try to buy another wall to try it out";
                     upWall = true;
                 }
             }
@@ -248,7 +255,9 @@ public class canvasGame : MonoBehaviour
             if(modeTutorial == true){
                 GameHandler.cekBeliBomb = true;
                 if(beliBomb == false){
-                    textTutorial.text = "Click on the last button to upgrage the bomb";
+                    abuyBomb.SetActive(false);
+                    aplaceBomb.SetActive(true);
+                    textTutorial.text = "Click on anywhere to drop the bomb";
                     beliBomb = true;
 
                     validChangeCursor = true;
@@ -324,7 +333,6 @@ public class canvasGame : MonoBehaviour
             }
         }
         if(modeTutorial == true){
-            GameHandler.cekBeliBomb = true;
             if(upBomb == false){
                 textTutorial.text = "Click the → button to go to the game";
                 upBomb = true;
@@ -345,6 +353,12 @@ public class canvasGame : MonoBehaviour
         }
         GetComponent<SoundEffect>().playSound(0, true, 1f);
         panelCancel.SetActive(false);
+
+        aupgradeWall.SetActive(false);
+        aplaceWall.SetActive(false);
+        abuyBomb.SetActive(false);
+        aupgradeBomb.SetActive(false);
+        aplaceBomb.SetActive(false);
     }
 
     public byte changeColor(){

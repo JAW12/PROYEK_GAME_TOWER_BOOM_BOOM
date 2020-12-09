@@ -129,3 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b3067476d0aef44498a510ddba7c697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  modeTutorial: 1
+  textTutorial: {fileID: 0}
+  aupgradeBomb: {fileID: 0}
+  aplaceBomb: {fileID: 0}

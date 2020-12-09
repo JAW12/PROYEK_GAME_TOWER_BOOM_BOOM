@@ -15,6 +15,15 @@ public class spawnWalls : MonoBehaviour
     bool can = true;
     public GameObject canvas;
     GameObject grupWalls;
+
+    
+    //tutorial
+    public bool modeTutorial;
+    public TextMeshProUGUI textTutorial;
+    public GameObject aplaceWall,abuyBomb;
+    
+    bool cekCtr = false;
+
     private void Start() {
         grupWalls = GameObject.Find("GrupWalls");
     }
@@ -90,6 +99,18 @@ public class spawnWalls : MonoBehaviour
                             canvas.GetComponent<canvasGame>().shop = -1;
                             canvas.GetComponent<canvasGame>().panelCancel.SetActive(false);
                             Cursor.SetCursor(canvas.GetComponent<canvasGame>().cursor, Vector2.zero, CursorMode.ForceSoftware);
+                            if(modeTutorial == true){
+                                if(cekCtr == false){
+                                    cekCtr = true;
+                                    aplaceWall.SetActive(false);
+                                    textTutorial.text = "When the kamikaze type enemy dies, it will drop a coin. Click on the coin to collect it.";
+                                }
+                                else{
+                                    abuyBomb.SetActive(true);
+                                    aplaceWall.SetActive(false);
+                                    textTutorial.text = "Try to buy a bomb";
+                                }
+                            }
                         }
                         else{
                             Debug.Log("nabrak");
