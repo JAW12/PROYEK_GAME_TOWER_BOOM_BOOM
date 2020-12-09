@@ -57,7 +57,9 @@ public class StoryAssistant : MonoBehaviour
         };
     }        
     
+    GameObject sound;
     private void Start() {
+        sound = GameObject.FindGameObjectWithTag("Music");
         Cursor.visible = true;
         Cursor.SetCursor(cursor, Vector2.zero, CursorMode.ForceSoftware);
         if(menang != true){
@@ -73,9 +75,12 @@ public class StoryAssistant : MonoBehaviour
             winGame();
         }
         if(staticResources.Instance() != null){
-            btnSound.GetComponent<Image>().sprite = gameObject.GetComponent<SoundEffect>().getSprite();
+            btnSound.GetComponent<Image>().sprite = sound.GetComponent<SoundEffect>().getSprite();
         }
-        GetComponent<SoundEffect>().playSound(0, false, 0.2f);
+    }
+
+    public void enableDisable(){
+        sound.GetComponent<SoundEffect>().enableDisable();
     }
 
     public void nextStory(){

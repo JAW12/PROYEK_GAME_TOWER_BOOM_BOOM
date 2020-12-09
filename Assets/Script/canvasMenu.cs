@@ -11,23 +11,40 @@ public class canvasMenu : MonoBehaviour
     public GameObject panelExit;
     public Button btnSound;
     public Texture2D cursor;
+    GameObject sound;
     
+    public AudioClip main;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        sound = GameObject.FindGameObjectWithTag("Music");
+        if(sound == null){
+            GameObject Sound = new GameObject();
+            Sound.tag = "Music";
+            Sound.name = "Sound";
+            Sound.AddComponent<SoundEffect>();
+            Sound.AddComponent<staticSound>();
+            Sound.GetComponent<SoundEffect>().soundEff = new AudioClip[1] {main};
+            sound = GameObject.FindGameObjectWithTag("Music");
+            sound.GetComponent<SoundEffect>().playSound(0, true, 0.2f);
+        }
+        if(staticResources.Instance() != null){
+            btnSound.GetComponent<Image>().sprite = sound.GetComponent<SoundEffect>().getSprite();
+        }
         Time.timeScale = 1;
         Cursor.visible = true;
-        if(staticResources.Instance() != null){
-            btnSound.GetComponent<Image>().sprite = gameObject.GetComponent<SoundEffect>().getSprite();
-        }
+        
         Cursor.SetCursor(cursor, Vector2.zero, CursorMode.ForceSoftware);
-        GetComponent<SoundEffect>().playSound(0, true, 0.2f);
         Debug.Log("played");
     }
 
     public void showHelp(){
         panelHelp.GetComponent<Animator>().SetBool("open", true);
+    }
+
+    public void enableDisable(){
+        sound.GetComponent<SoundEffect>().enableDisable();
     }
 
     public void startGame(){
@@ -36,6 +53,10 @@ public class canvasMenu : MonoBehaviour
         canvasLoading.sceneLoad = 0;
         SceneManager.LoadScene("Loading");
         Time.timeScale = 1;
+    }
+
+    public void openAbout(){
+        SceneManager.LoadScene("About");
     }
 
     // Update is called once per frame

@@ -35,7 +35,8 @@ public class SoundEffect : MonoBehaviour
 
     // Start is called before the first frame update
     void Awake()
-    {   audio = gameObject.AddComponent(typeof(AudioSource)) as AudioSource; 
+    {   
+        audio = gameObject.AddComponent(typeof(AudioSource)) as AudioSource; 
     }
 
     public void playSound(int i, bool loop, float volume)
@@ -56,5 +57,9 @@ public class SoundEffect : MonoBehaviour
         if(!soundOn){
             audio.Pause();
         }
+    }
+
+    public void stopSound(){
+        audio.Stop();
     }
 }

@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WinGane.unity
     guid: 9ce9b40dc4bb3b1409549520705b7976
+  - enabled: 1
+    path: Assets/Scenes/About.unity
+    guid: 99608b0ce5bb9f2488558558190548b2
   m_configObjects: {}
