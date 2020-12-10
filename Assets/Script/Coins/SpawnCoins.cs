@@ -26,6 +26,7 @@ public class SpawnCoins : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        canvasGame.cekCtr = false;
         squares = new List<GameObject>();
         releasedbutton = true;
         canplace = false;
@@ -64,10 +65,9 @@ public class SpawnCoins : MonoBehaviour
                         if(canvasGame.cekCtr == false){
                             aupgradeWall.SetActive(true);
                             textTutorial.text = "Upgrade the wall so it can withstand more damage.";
-                            modeTutorial = false;
                             canvasGame.cekCtr = true;
                         }
-                        if(square.name.ToString() == "5"){
+                        else{
                             textTutorial.text = "Click the → button to go to the game";
                         }
                     }
