@@ -449,8 +449,8 @@ public class canvasGame : MonoBehaviour
         textScoreGO.text = textScore.text;
         textGameOver_Menang.text = "You Win";
         panelGameOver.GetComponent<Animator>().SetBool("open", true);
-        // GetComponent<SoundEffect>().playSound(1, false, 1f);
-        GetComponent<SoundEffect>().playSound(3, false, 1f);
+        GetComponent<SoundEffect>().playSound(1, false, 1f);
+        //GetComponent<SoundEffect>().playSound(3, false, 1f);
     }
 
     public void restart(){

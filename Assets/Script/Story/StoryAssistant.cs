@@ -119,6 +119,7 @@ public class StoryAssistant : MonoBehaviour
         currentStory = 6;
         string message = messageArray[currentStory];
         textWriterSingle = TextWriter.AddWriter_Static(messageText, message, 0.1f, true, true);
+        GetComponent<SoundEffect>().playSound(0, true, 1f);
         panel.GetComponent<Image>().sprite = spriteArray[currentStory];
     }
 
